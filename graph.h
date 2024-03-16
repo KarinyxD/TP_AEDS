@@ -2,25 +2,29 @@
 #define GRAPH_H
 
 // Define the structure for a Graph
+// using a linked list representation
+typedef struct {
+    int value;
+    int weight;
+    struct Vertex* next;
+} Vertex;
+
 typedef struct {
     int numVertices;
-    int** edges;
+    Vertex* vertexList;
 } Graph;
 
-// Define the structure for an Edge
-typedef struct {
-    int v1;
-    int v2;
-    int weight;
-} Edge;
 
 // Function declarations
-Graph* CreateEmptyGraph(int numVertices);
-void InsertEdge(int v1, int v2, int weight, Graph* graph);
-int DoesEdgeExist(int v1, int v2, Graph* graph);
-int* GetAdjacentVertices(int v, Graph* graph);
-void RemoveEdge(int v1, int v2, int weight, Graph* graph);
-void FreeGraph(Graph* graph);
+void CreateEmptyGraph(Graph* graph);
+void AddVertex(int vertex, Graph* graph);
+// void InsertEdge(int v1, int v2, int weight, Graph* graph);
+// int DoesEdgeExist(int v1, int v2, Graph* graph);
+// int* GetAdjacentVertices(int v, Graph* graph);
+// void RemoveEdge(int v1, int v2, int weight, Graph* graph);
+// void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
-Graph* TransposeGraph(Graph* graph);
-Edge* RemoveMinEdge(Graph* graph);
+// Graph* TransposeGraph(Graph* graph);
+// Edge* RemoveMinEdge(Graph* graph);
+
+#endif
