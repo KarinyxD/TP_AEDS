@@ -15,11 +15,17 @@ void main(){
     InsertEdge(2, 3, 1, graph);
     InsertEdge(3, 4, 1, graph);
     InsertEdge(4, 5, 1, graph);
-    int *list = GetAdjacentVertices(1, graph);
-    while (*list != -1){
-        printf("%d ", *list);
-        list++;
-    }
-
-    PrintGraph(graph);
+    // int *list = GetAdjacentVertices(1, graph);
+    // while (*list != -1){
+    //     printf("%d ", *list);
+    //     list++;
+    // }
+    // printf("\n");
+    // RemoveEdge(1, 2, 1, graph);
+    // list = GetAdjacentVertices(1, graph);
+    // while (*list != -1){
+    //     printf("%d ", *list);
+    //     list++;
+    // }
+    FreeGraph(graph);
 }

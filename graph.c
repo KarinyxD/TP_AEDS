@@ -114,3 +114,36 @@ int* GetAdjacentVertices(int v, Graph* graph){
     }
     return adjacentVertices;
 }
+// remove an edge
+void RemoveEdge(int v1, int v2, int weight, Graph* graph){
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v1){
+            Vertex* current = &graph->vertexList[i];
+            while(current->next != NULL){
+                if (current->next->value == v2 && current->next->weight == weight){
+                    Vertex* temp = current->next;
+                    current->next = current->next->next;
+                    free(temp);
+                    return;
+                }
+                current = current->next;
+            }
+            printf("Warning: Edge %d(%d) does not exist\n", v2, weight);
+            return;
+        }
+    }
+
+}
+// free the graph
+void FreeGraph(Graph* graph){
+    for (int i = 0; i < graph->numVertices; i++){
+        Vertex* current = &graph->vertexList[i];
+        while(current->next != NULL){
+            Vertex* temp = current->next;
+            current->next = current->next->next;
+            free(temp);
+        }
+    }
+    free(graph->vertexList);
+    free(graph);
+}

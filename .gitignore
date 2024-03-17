@@ -4,3 +4,5 @@
 *.o
 #ignore .vscode folder
 .vscode
+#ignore prog
+prog
