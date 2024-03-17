@@ -76,3 +76,21 @@ void InsertEdge(int v1, int v2, int weight, Graph* graph){
         }
     }
 }
+
+// check if the edge exists
+int DoesEdgeExist(int v1, int v2, Graph* graph){
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v1){
+            Vertex* current = &graph->vertexList[i];
+            while(current->next != NULL){
+                if (current->next->value == v2){
+                    return 1;
+                }
+                current = current->next;
+            }
+            return 0;
+        }
+    }
+    printf("Warning: Vertex %d does not exist\n", v1);
+    return 0;
+}

@@ -16,6 +16,10 @@ void main(){
     InsertEdge(3, 4, 1, graph);
     InsertEdge(4, 5, 1, graph);
     InsertEdge(15, 5, 1, graph);
+    DoesEdgeExist(1, 2, graph);
+    DoesEdgeExist(1, 4, graph);
+    DoesEdgeExist(1, 6, graph);
+    DoesEdgeExist(15, 2, graph);
     // now print all the vertices
     PrintGraph(graph);
 }

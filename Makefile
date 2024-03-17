@@ -14,4 +14,4 @@ graph.o: graph.c graph.h
     
 # Clean up
 clean:
-	rm -rf *.o prog.exe
+	rm -rf *.o prog

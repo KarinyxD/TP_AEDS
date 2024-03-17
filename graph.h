@@ -18,7 +18,7 @@ typedef struct {
 void CreateEmptyGraph(Graph* graph);
 void AddVertex(int vertex, Graph* graph);
 void InsertEdge(int v1, int v2, int weight, Graph* graph);
-// int DoesEdgeExist(int v1, int v2, Graph* graph);
+int DoesEdgeExist(int v1, int v2, Graph* graph);
 // int* GetAdjacentVertices(int v, Graph* graph);
 // void RemoveEdge(int v1, int v2, int weight, Graph* graph);
 // void FreeGraph(Graph* graph);
