@@ -1,0 +1,6 @@
+#ignore all .exe files
+*.exe
+#ignore all .o files
+*.o
+#ignore .vscode folder
+.vscode

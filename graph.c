@@ -22,7 +22,14 @@ void AddVertex(int vertex, Graph* graph){
 void PrintGraph(Graph* graph){
     printf("The graph has %d vertices\n", graph->numVertices);
     for(int i = 0; i < graph->numVertices; i++){
-        printf("Vertex %d has value %d and points to %p\n", i, graph->vertexList[i].value, graph->vertexList[i].next);
+        // now print the vertex value and all its edges with weights
+        printf("Vertex %d has the following edges(weight): ", graph->vertexList[i].value);
+        Vertex* current = &graph->vertexList[i];
+        while(current->next != NULL){
+            printf("%d(%d) ", current->next->value, current->next->weight);
+            current = current->next;
+        }
+        printf("\n");
     }
 }
 
@@ -34,8 +41,10 @@ void InsertEdge(int v1, int v2, int weight, Graph* graph){
         if (graph->vertexList[i].value == v1){
             break;
         }
-        if (i == graph->numVertices - 1){
-            printf("Vertex %d does not exist\n", v1);
+        // give a warning if the vertex v1 does not exist
+        else if (i == graph->numVertices - 1){
+            printf("Warning: Vertex %d does not exist\n"
+            "Warning: No edges were inserted\n", v1);
             return;
         }
     }
