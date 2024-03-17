@@ -13,5 +13,5 @@ int DoesEdgeExist(int v1, int v2, graph)
 #Funções auxiliares
 
 #To do
-- Precisamos corrigir o Remove Edges, pois está tendo algum vazamento de memória ainda não identificado
-- Facilitaria nosso trabalho no futuro se a gente removesse a função adicionar vertice, e simplismente criassemos o vertice ao adicionar uma aresta
+- Implementar função de grafo transposto
+- Implementar função que remove e retorna a aresta minima
