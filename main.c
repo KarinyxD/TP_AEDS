@@ -15,11 +15,11 @@ void main(){
     InsertEdge(2, 3, 1, graph);
     InsertEdge(3, 4, 1, graph);
     InsertEdge(4, 5, 1, graph);
-    InsertEdge(15, 5, 1, graph);
-    DoesEdgeExist(1, 2, graph);
-    DoesEdgeExist(1, 4, graph);
-    DoesEdgeExist(1, 6, graph);
-    DoesEdgeExist(15, 2, graph);
-    // now print all the vertices
+    int *list = GetAdjacentVertices(1, graph);
+    while (*list != -1){
+        printf("%d ", *list);
+        list++;
+    }
+
     PrintGraph(graph);
 }

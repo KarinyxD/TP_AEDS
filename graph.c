@@ -94,3 +94,23 @@ int DoesEdgeExist(int v1, int v2, Graph* graph){
     printf("Warning: Vertex %d does not exist\n", v1);
     return 0;
 }
+// get a list of all the adjacent vertices
+int* GetAdjacentVertices(int v, Graph* graph){
+    // create a list of adjacent vertices with a maximum size of the number of vertices
+    int* adjacentVertices = (int*)malloc(graph->numVertices * sizeof(int));
+    int count = 0;
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v){
+            Vertex* current = &graph->vertexList[i];
+            while(current->next != NULL){
+                adjacentVertices[count] = current->next->value;
+                count++;
+                current = current->next;
+            }
+            // making the last element of the list -1
+            adjacentVertices[count] = -1;
+            break;
+        }
+    }
+    return adjacentVertices;
+}
