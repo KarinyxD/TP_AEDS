@@ -36,37 +36,35 @@ void PrintGraph(Graph* graph){
 // void InsertEdge(int v1, int v2, int weight, Graph* graph);
 // function to insert an edge between two vertices
 void InsertEdge(int v1, int v2, int weight, Graph* graph){
-    // check if the v1 vertex exists
+    int v1Exists = 0, v2Exists = 0;
+
+    // Check if the vertices v1 and v2 exist
     for (int i = 0; i < graph->numVertices; i++){
         if (graph->vertexList[i].value == v1){
-            break;
+            v1Exists = 1;
         }
-        // give a warning if the vertex v1 does not exist
-        else if (i == graph->numVertices - 1){
-            printf("Warning: Vertex %d does not exist\n"
-            "Warning: No edges were inserted\n", v1);
-            return;
-        }
-    }
-    // check if the v2 vertex exists
-    for (int i = 0; i < graph->numVertices; i++){
         if (graph->vertexList[i].value == v2){
-            break;
-        }
-        // if it doesnt exists create it
-        if (i == graph->numVertices - 1){
-            AddVertex(v2, graph);
-            break;
+            v2Exists = 1;
         }
     }
-    // find the vertex with value v1 and add a new vertex with value v2 and weight to the end of the list
+
+    // Create the vertices v1 and v2 if they don't exist
+    if (!v1Exists){
+        AddVertex(v1, graph);
+    }
+    if (!v2Exists){
+        AddVertex(v2, graph);
+    }
+
+    // Find the vertex with value v1 and add a new vertex with value v2 and weight to the end of the list
     for (int i = 0; i < graph->numVertices; i++){
         if (graph->vertexList[i].value == v1){
             Vertex* newVertex = (Vertex*)malloc(sizeof(Vertex));
             newVertex->value = v2;
             newVertex->weight = weight;
             newVertex->next = NULL;
-            // find the last vertex from vertex next
+
+            // Find the last vertex from vertex next
             Vertex* current = &graph->vertexList[i];
             while(current->next != NULL){
                 current = current->next;
@@ -116,23 +114,26 @@ int* GetAdjacentVertices(int v, Graph* graph){
 }
 // remove an edge
 void RemoveEdge(int v1, int v2, int weight, Graph* graph){
+    // find the vertex with value v1
     for (int i = 0; i < graph->numVertices; i++){
+        // if the vertex is found, current is the vertex with value v1 and prev is the vertex before current
         if (graph->vertexList[i].value == v1){
-            Vertex* current = &graph->vertexList[i];
-            while(current->next != NULL){
-                if (current->next->value == v2 && current->next->weight == weight){
-                    Vertex* temp = current->next;
-                    current->next = current->next->next;
-                    free(temp);
+            Vertex* current = graph->vertexList[i].next;
+            Vertex* prev = &graph->vertexList[i];
+            // find the vertex with value v2 and remove it
+            while(current != NULL){
+                if (current->value == v2 && current->weight == weight){
+                    prev->next = current->next;
+                    free(current);
                     return;
                 }
+                prev = current;
                 current = current->next;
             }
             printf("Warning: Edge %d(%d) does not exist\n", v2, weight);
             return;
         }
     }
-
 }
 // free the graph
 void FreeGraph(Graph* graph){
