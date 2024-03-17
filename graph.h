@@ -3,10 +3,10 @@
 
 // Define the structure for a Graph
 // using a linked list representation
-typedef struct {
+typedef struct Vertex {
     int value;
     int weight;
-    struct Vertex* next;
+    struct Vertex *next;
 } Vertex;
 
 typedef struct {
@@ -14,11 +14,10 @@ typedef struct {
     Vertex* vertexList;
 } Graph;
 
-
 // Function declarations
 void CreateEmptyGraph(Graph* graph);
 void AddVertex(int vertex, Graph* graph);
-// void InsertEdge(int v1, int v2, int weight, Graph* graph);
+void InsertEdge(int v1, int v2, int weight, Graph* graph);
 // int DoesEdgeExist(int v1, int v2, Graph* graph);
 // int* GetAdjacentVertices(int v, Graph* graph);
 // void RemoveEdge(int v1, int v2, int weight, Graph* graph);

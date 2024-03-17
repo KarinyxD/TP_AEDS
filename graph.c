@@ -25,3 +25,45 @@ void PrintGraph(Graph* graph){
         printf("Vertex %d has value %d and points to %p\n", i, graph->vertexList[i].value, graph->vertexList[i].next);
     }
 }
+
+// void InsertEdge(int v1, int v2, int weight, Graph* graph);
+// function to insert an edge between two vertices
+void InsertEdge(int v1, int v2, int weight, Graph* graph){
+    // check if the v1 vertex exists
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v1){
+            break;
+        }
+        if (i == graph->numVertices - 1){
+            printf("Vertex %d does not exist\n", v1);
+            return;
+        }
+    }
+    // check if the v2 vertex exists
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v2){
+            break;
+        }
+        // if it doesnt exists create it
+        if (i == graph->numVertices - 1){
+            AddVertex(v2, graph);
+            break;
+        }
+    }
+    // find the vertex with value v1 and add a new vertex with value v2 and weight to the end of the list
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v1){
+            Vertex* newVertex = (Vertex*)malloc(sizeof(Vertex));
+            newVertex->value = v2;
+            newVertex->weight = weight;
+            newVertex->next = NULL;
+            // find the last vertex from vertex next
+            Vertex* current = &graph->vertexList[i];
+            while(current->next != NULL){
+                current = current->next;
+            }
+            current->next = newVertex;
+            break;
+        }
+    }
+}
