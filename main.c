@@ -3,8 +3,7 @@
 #include "graph.h"
 
 void main(){
-    Graph* graph = (Graph*)malloc(sizeof(Graph));
-    CreateEmptyGraph(graph);
+    Graph * graph = CreateEmptyGraph();
     InsertEdge(1, 2, 10, graph);
     InsertEdge(1, 4, 5, graph);
     InsertEdge(1, 7, 50, graph);
@@ -16,8 +15,13 @@ void main(){
     // RemoveEdge(2, 3, 1, graph);
     // RemoveEdge(3, 4, 2, graph);
     // RemoveEdge(4, 5, 1, graph);
-    PrintGraph(graph);
-    Edge edge = RemoveMinEdge(graph);
-    PrintGraph(graph);
+    // Edge edge[5];
+    // for (int i = 0; i < 5; i++){
+    //     edge[i] = RemoveMinEdge(graph);
+    // }
+    // FreeGraph(graph);
+    Graph* grapht = TransposeGraph(graph);
+    PrintGraph(grapht);
     FreeGraph(graph);
+    FreeGraph(grapht);
 }

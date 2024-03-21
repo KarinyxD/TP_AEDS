@@ -5,13 +5,15 @@
 #include <limits.h>
 
 //function to create a new empty graph
-void CreateEmptyGraph(Graph* graph){
+Graph* CreateEmptyGraph(){
+    Graph* graph = (Graph*)malloc(sizeof(Graph));
     graph->numVertices = 0;
     graph->vertexList = NULL;
+    return graph;
 }
 
 //function to add a vertex to the graph
-void AddVertex(int vertex, Graph* graph){
+void AddVertex(int vertex, Graph *graph){
     graph->numVertices++;
     graph->vertexList = (Vertex*)realloc(graph->vertexList, graph->numVertices * sizeof(Vertex));
     graph->vertexList[graph->numVertices - 1].value = vertex;
@@ -150,10 +152,6 @@ void FreeGraph(Graph* graph){
     free(graph);
 }
 
-// Graph* TransposeGraph(Graph* graph){
-//     return;
-// }
-
 //removes the smallest edge of the graph
 Edge RemoveMinEdge(Graph* graph){
     Edge edge;
@@ -172,4 +170,23 @@ Edge RemoveMinEdge(Graph* graph){
     RemoveEdge(edge.v1, edge.v2, edge.weight,graph);
     printf("The minimum edge between %d e %d, with weight = %d was delete!\n", edge.v1, edge.v2, edge.weight);
     return edge;
+}
+
+Graph* TransposeGraph(Graph* graph){
+    Graph *grapht = CreateEmptyGraph();
+    Edge edge;
+    for(int i = 0; i < graph->numVertices; i++){
+        AddVertex(graph->vertexList[i].value, grapht);
+    }
+    for (int i = 0; i < graph->numVertices; i++){
+        edge.v1 = graph->vertexList[i].value;
+        Vertex* current = graph->vertexList[i].next;      
+        while(current != NULL){
+            edge.v2 = current->value;
+            edge.weight = current->weight;
+            InsertEdge(edge.v2, edge.v1 , edge.weight, grapht);
+            current = current->next;
+        }
+    }
+    return grapht;
 }
