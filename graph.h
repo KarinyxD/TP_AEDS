@@ -23,7 +23,7 @@ int* GetAdjacentVertices(int v, Graph* graph);
 void RemoveEdge(int v1, int v2, int weight, Graph* graph);
 void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
-//Graph* TransposeGraph(Graph* graph);
+///Graph* TransposeGraph(Graph* graph);
 void RemoveMinEdge(Graph* graph);
 
 #endif

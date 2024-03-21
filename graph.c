@@ -174,6 +174,6 @@ void RemoveMinEdge(Graph* graph){
         }
     }
     RemoveEdge(smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight,graph);
-    printf("The minimum edge between %d e %d, with weight = %d was delete.\n", smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight);
+    printf("The minimum edge between %d e %d, with weight = %d was delete!\n", smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight);
     FreeGraph(smallest);
 }

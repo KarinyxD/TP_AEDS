@@ -17,7 +17,7 @@ void main(){
     RemoveEdge(3, 4, 2, graph);
     RemoveEdge(4, 5, 1, graph);
     PrintGraph(graph);
-    RemoveMinEdge(graph);
+    //RemoveMinEdge(graph);
     PrintGraph(graph);
     FreeGraph(graph);
 }
