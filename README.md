@@ -15,6 +15,5 @@ int DoesEdgeExist(int v1, int v2, graph)
 #To do
 - Masterizar a funcao de deletar e retornar a menor aresta
 question:(e se tiver 2 arestas minimas?Com o mesmo peso?Remove todas?)
-- Passar Valgrid
 
 - Implementar função de grafo transposto
