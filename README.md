@@ -1,7 +1,7 @@
 #Do que se trata?
 
 #Sobre decisões em relação a estrutura de dados
-Inicialmente estaremos implementando grafos utilizando uma lista de adjacencia. O motivo é a facilidade na implementação. Que nós permite ter mais tempo para focar em uma boa estruturação do codigo, boa modularização, e solução do problema proposto. Posteriormente, podemos realizar a modificação da estrutura de dados e das funções de grafos para otimizar o codigo, se assim julgarmos necessário.
+Inicialmente estaremos implementando grafos utilizando uma lista de adjacencia. O motivo é a facilidade na implementação, que nos permite ter mais tempo para focar em uma boa estruturação do codigo, boa modularização, e solução do problema proposto. Posteriormente, podemos realizar a modificação da estrutura de dados e das funções de grafos para otimizar o codigo, se assim julgarmos necessário.
 
 #Funções Implementadas
 void CreateEmptyGraph(Graph* graph)
@@ -13,5 +13,8 @@ int DoesEdgeExist(int v1, int v2, graph)
 #Funções auxiliares
 
 #To do
+- Masterizar a funcao de deletar e retornar a menor aresta
+question:(e se tiver 2 arestas minimas?Com o mesmo peso?Remove todas?)
+- Passar Valgrid
+
 - Implementar função de grafo transposto
-- Implementar função que remove e retorna a aresta minima

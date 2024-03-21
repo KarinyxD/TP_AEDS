@@ -2,6 +2,7 @@
 #include "graph.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 //function to create a new empty graph
 void CreateEmptyGraph(Graph* graph){
@@ -38,7 +39,7 @@ void PrintGraph(Graph* graph){
 void InsertEdge(int v1, int v2, int weight, Graph* graph){
     int v1Exists = 0, v2Exists = 0;
 
-    // Check if the vertices v1 and v2 exist
+    // Check if the vertices v1 and v2 existint weight;
     for (int i = 0; i < graph->numVertices; i++){
         if (graph->vertexList[i].value == v1){
             v1Exists = 1;
@@ -147,4 +148,32 @@ void FreeGraph(Graph* graph){
     }
     free(graph->vertexList);
     free(graph);
+}
+
+// Graph* TransposeGraph(Graph* graph){
+//     return;
+// }
+
+//removes the smallest edge of the graph
+void RemoveMinEdge(Graph* graph){
+    Graph* smallest= (Graph*)malloc(sizeof(Graph)); //mini graph to store the minimum vertices/edge
+    CreateEmptyGraph(smallest);
+    AddVertex(1, smallest);
+    AddVertex(2, smallest);
+    InsertEdge(1, 2, INT_MAX, smallest); //adds the largest edge
+    PrintGraph(smallest);
+    for (int i = 0; i < graph->numVertices; i++){
+        Vertex* current = graph->vertexList[i].next;
+        while(current != NULL){
+            if (smallest->vertexList[0].next->weight > current->weight){
+                smallest->vertexList[0].value = graph->vertexList[i].value;
+                smallest->vertexList[0].next->value = current->value;
+                smallest->vertexList[0].next->weight = current->weight;
+            }
+            current = current->next;
+        }
+    }
+    RemoveEdge(smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight,graph);
+    printf("The minimum edge between %d e %d, with weight = %d was delete.\n", smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight);
+    FreeGraph(smallest);
 }
