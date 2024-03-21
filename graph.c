@@ -155,25 +155,21 @@ void FreeGraph(Graph* graph){
 // }
 
 //removes the smallest edge of the graph
-void RemoveMinEdge(Graph* graph){
-    Graph* smallest= (Graph*)malloc(sizeof(Graph)); //mini graph to store the minimum vertices/edge
-    CreateEmptyGraph(smallest);
-    AddVertex(1, smallest);
-    AddVertex(2, smallest);
-    InsertEdge(1, 2, INT_MAX, smallest); //adds the largest edge
-    PrintGraph(smallest);
+Edge RemoveMinEdge(Graph* graph){
+    Edge edge;
+    edge.weight = INT_MAX;
     for (int i = 0; i < graph->numVertices; i++){
         Vertex* current = graph->vertexList[i].next;
         while(current != NULL){
-            if (smallest->vertexList[0].next->weight > current->weight){
-                smallest->vertexList[0].value = graph->vertexList[i].value;
-                smallest->vertexList[0].next->value = current->value;
-                smallest->vertexList[0].next->weight = current->weight;
+            if (edge.weight > current->weight){
+                edge.v1 = graph->vertexList[i].value;
+                edge.v2 = current->value;
+                edge.weight = current->weight;
             }
             current = current->next;
         }
     }
-    RemoveEdge(smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight,graph);
-    printf("The minimum edge between %d e %d, with weight = %d was delete!\n", smallest->vertexList[0].value, smallest->vertexList[0].next->value, smallest->vertexList[0].next->weight);
-    FreeGraph(smallest);
+    RemoveEdge(edge.v1, edge.v2, edge.weight,graph);
+    printf("The minimum edge between %d e %d, with weight = %d was delete!\n", edge.v1, edge.v2, edge.weight);
+    return edge;
 }

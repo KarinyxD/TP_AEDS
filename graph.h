@@ -9,6 +9,12 @@ typedef struct Vertex {
     struct Vertex *next;
 } Vertex;
 
+typedef struct Edge{
+    int v1;
+    int v2;
+    int weight;
+} Edge;
+
 typedef struct {
     int numVertices;
     Vertex* vertexList;
@@ -24,6 +30,6 @@ void RemoveEdge(int v1, int v2, int weight, Graph* graph);
 void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 ///Graph* TransposeGraph(Graph* graph);
-void RemoveMinEdge(Graph* graph);
+Edge RemoveMinEdge(Graph* graph);
 
 #endif
