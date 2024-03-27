@@ -24,6 +24,7 @@ void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, 
         }
         i++;
     }
+    free(AdjVertices);
     // printf("While x: \n");
     // for(int i = 0; i < 2 ; i++){
     //     for(int j= 0; j < numVertices; j++){
@@ -46,7 +47,7 @@ Graph* Dijkstra(Graph* graph){
     }
     vpc[1][0] = 0;
     S[0] = 0;
-    
+
     int i = 0;
     while(S[numVertices] != -1 && i < numVertices){
         Relaxation(numVertices, vpc, i, graph, S);
@@ -58,6 +59,5 @@ Graph* Dijkstra(Graph* graph){
     for (int i = 1; i < numVertices; i++){
         InsertEdge(vpc[0][i], i, vpc[1][i], spath);
     }
-    // PrintGraph(spath);
     return spath;
 }

@@ -26,9 +26,12 @@ void main(){
     // FreeGraph(graph);
     // Graph* grapht = TransposeGraph(graph);
     // PrintGraph(grapht);
-    // FreeGraph(graph);
     // FreeGraph(grapht);
 
     Graph* spath; 
     spath = Dijkstra(graph);
+    PrintGraph(graph);
+    PrintGraph(spath);
+    FreeGraph(spath);
+    FreeGraph(graph);
 }

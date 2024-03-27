@@ -28,5 +28,8 @@ void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, 
 #To do
 --Encontrar os k menores caminhos.
 
-###OBS do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo com valores numéricos,
+###OBS1 do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo com valores numéricos,
 em ordem crescente(inclusive a declaração), COMEÇANDO do número 0.
+
+###OBS2 funçao djkistra: os pesos retornados no grafo (do menor caminho), são os pesos dos vertices anteriores somados. 
+o peso do ultimo vértice, corresponde ao custo total do caminho.
