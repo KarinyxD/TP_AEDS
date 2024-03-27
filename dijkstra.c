@@ -47,36 +47,17 @@ Graph* Dijkstra(Graph* graph){
     vpc[1][0] = 0;
     S[0] = 0;
     
-    // for(int i=0;i<numVertices;i++){
-    //     printf("%d ", S[i]);
-    // }
     int i = 0;
     while(S[numVertices] != -1 && i < numVertices){
         Relaxation(numVertices, vpc, i, graph, S);
         S[i] = graph->vertexList[i].value;
         i++;
     }
-    // printf("os vertices adjacentes a 1 com seus respectivos pesos sao: \n");
-//    int i = 0;
-    // while(AdjVertices[i].v2 != -1){
-    //     printf("%d  %d\n", AdjVertices[i].v2, AdjVertices[i].weight);
-    //     i++;
-    // }
-    //for (int i = 0; i < 2; i++) {
-    //    free(vpc[i]);
-    //}
-    //free(vpc);
 
-    // while (S[numVertices-1] != -1){
-    //     for(int i = 0; i < numVertices; i++){
-    //         Edge *AdjVertices = GetAdjacentVertices(S[i], graph);
-    //         if (graph->vertexList[i].value == S[i]){
-
-    //         //Vertex* current = &graph->vertexList[i];
-            
-    //         }
-    //     }
-    // }
-
+    AddVertex(0, spath);
+    for (int i = 1; i < numVertices; i++){
+        InsertEdge(vpc[0][i], i, vpc[1][i], spath);
+    }
+    // PrintGraph(spath);
     return spath;
 }
