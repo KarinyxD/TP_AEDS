@@ -20,8 +20,11 @@ void main(){
     //     edge[i] = RemoveMinEdge(graph);
     // }
     // FreeGraph(graph);
-    Graph* grapht = TransposeGraph(graph);
-    PrintGraph(grapht);
-    FreeGraph(graph);
-    FreeGraph(grapht);
+    // Graph* grapht = TransposeGraph(graph);
+    // PrintGraph(grapht);
+    // FreeGraph(graph);
+    // FreeGraph(grapht);
+
+    Graph* spath; 
+    spath = Dijkstra(1, graph);
 }

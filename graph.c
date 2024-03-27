@@ -96,20 +96,21 @@ int DoesEdgeExist(int v1, int v2, Graph* graph){
     return 0;
 }
 // get a list of all the adjacent vertices
-int* GetAdjacentVertices(int v, Graph* graph){
+Edge* GetAdjacentVertices(int v, Graph* graph){
     // create a list of adjacent vertices with a maximum size of the number of vertices
-    int* adjacentVertices = (int*)malloc(graph->numVertices * sizeof(int));
+    Edge* adjacentVertices = (Edge*)malloc(graph->numVertices * sizeof(Edge));
     int count = 0;
     for (int i = 0; i < graph->numVertices; i++){
         if (graph->vertexList[i].value == v){
             Vertex* current = &graph->vertexList[i];
             while(current->next != NULL){
-                adjacentVertices[count] = current->next->value;
+                adjacentVertices[count].v2 = current->next->value;
+                adjacentVertices[count].weight = current->next->weight;
                 count++;
                 current = current->next;
             }
             // making the last element of the list -1
-            adjacentVertices[count] = -1;
+            adjacentVertices[count].v2 = -1;
             break;
         }
     }
