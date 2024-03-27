@@ -31,6 +31,6 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
-Graph* Dijkstra(int v1, Graph* graph);
+Graph* Dijkstra(Graph* graph);
 void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, int *S);
 #endif

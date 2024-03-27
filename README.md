@@ -27,7 +27,7 @@ void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, 
 
 #To do
 
--Implementar Dijkstra;
+-Terminar o Dijkstra(falta só montar a estrutura de retorno(grafo));
 
 ###OBS do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo com valores numéricos,
 em ordem crescente(inclusive a declaração), COMEÇANDO do número 0.

@@ -24,15 +24,16 @@ void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, 
         }
         i++;
     }
-    for(int i = 0; i < 2 ; i++){
-        for(int j= 0; j < numVertices; j++){
-            printf("%d ", vpc[i][j]);
-        }
-        printf("\n");
-    }
+    // printf("While x: \n");
+    // for(int i = 0; i < 2 ; i++){
+    //     for(int j= 0; j < numVertices; j++){
+    //         printf("%d ", vpc[i][j]);
+    //     }
+    //     printf("\n");
+    // }
 }
 
-Graph* Dijkstra(int v1, Graph* graph){
+Graph* Dijkstra(Graph* graph){
     Graph* spath = CreateEmptyGraph();
 
     int numVertices = graph->numVertices;
@@ -44,16 +45,17 @@ Graph* Dijkstra(int v1, Graph* graph){
         S[i] = -1; 
     }
     vpc[1][0] = 0;
-    S[0] = v1;
+    S[0] = 0;
     
     // for(int i=0;i<numVertices;i++){
     //     printf("%d ", S[i]);
     // }
-    Edge *AdjVertices = GetAdjacentVertices(v1, graph); 
     int i = 0;
-    int v_current = v1;
-    
-    Relaxation(numVertices, vpc, v1, graph, S);
+    while(S[numVertices] != -1 && i < numVertices){
+        Relaxation(numVertices, vpc, i, graph, S);
+        S[i] = graph->vertexList[i].value;
+        i++;
+    }
     // printf("os vertices adjacentes a 1 com seus respectivos pesos sao: \n");
 //    int i = 0;
     // while(AdjVertices[i].v2 != -1){

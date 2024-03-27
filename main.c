@@ -30,5 +30,5 @@ void main(){
     // FreeGraph(grapht);
 
     Graph* spath; 
-    spath = Dijkstra(0, graph);
+    spath = Dijkstra(graph);
 }
