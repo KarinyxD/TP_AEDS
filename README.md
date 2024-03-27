@@ -13,10 +13,21 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
+Graph* Dijkstra(int v1, Graph* graph);
 
 #Funções auxiliares
 void AddVertex(int vertex, Graph* graph);
+void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, int *S);
+
+#Feitos Kariny
+--modifiquei a funçao GetAdjacentVertices para poder retornar uma struct do tipo Edge;
+--fiz a funçao auxiliar Relaxation, usada no Djkistra;
+--estou terminando o algoritmo Djkistra;
+
 
 #To do
 
 -Implementar Dijkstra;
+
+###OBS do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo com valores numéricos,
+em ordem crescente(inclusive a declaração), COMEÇANDO do número 0.
