@@ -31,5 +31,5 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
-
+Graph* Dijkstra(int v1, Graph* graph);
 #endif
