@@ -4,7 +4,7 @@
 #include <limits.h>
 
 //Get nearest unvisited vertex
-void Relaxation(int numVertices, int vpc[2][numVertices], int v1, Graph* graph, int *S){
+void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S){
 
     Edge *AdjVertices = GetAdjacentVertices(v1, graph); 
     int i = 0;
@@ -38,18 +38,21 @@ Graph* Dijkstra(Graph* graph){
     Graph* spath = CreateEmptyGraph();
 
     int numVertices = graph->numVertices;
-    int S[numVertices];
-    int vpc[2][numVertices];
+    int *S = (int*)malloc(numVertices * sizeof(int));    
+    int **vpc = (int**)malloc(2 * sizeof(int*)); // Aloca as linhas da matriz    
+    for (int i = 0; i < 2; i++) {
+        vpc[i] = (int*)malloc(numVertices * sizeof(int)); // Aloca as colunas da matriz
+    }
     for (int i = 0; i < numVertices; i++){
-        vpc[0][i] = -1;
+        vpc[0][i], S[i] = -1;
         vpc[1][i] = INT_MAX;
-        S[i] = -1; 
     }
     vpc[1][0] = 0;
     S[0] = 0;
 
     int i = 0;
-    while(S[numVertices] != -1 && i < numVertices){
+    
+    while(i < numVertices){
         Relaxation(numVertices, vpc, i, graph, S);
         S[i] = graph->vertexList[i].value;
         i++;
@@ -59,5 +62,11 @@ Graph* Dijkstra(Graph* graph){
     for (int i = 1; i < numVertices; i++){
         InsertEdge(vpc[0][i], i, vpc[1][i], spath);
     }
+    
+    for (int j = 0; j < 2; j++) {
+        free(vpc[j]);
+    }
+    free(vpc);
+    free(S);
     return spath;
 }
