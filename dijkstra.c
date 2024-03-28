@@ -51,12 +51,15 @@ Graph* Dijkstra(int v1, Graph* graph){
         S[i] = graph->vertexList[i].value;
         i++;
     }
-    
+
     //AddVertex(1, spath);
     for (int i = 2; i <= numVertices; i++){
         InsertEdge(vpc[0][i], i, vpc[1][i], spath);
     }
-
+    
+    for (int j = 0; j < 2; j++) {
+        free(vpc[j]);
+    }
     free(vpc);
     free(S);
     return spath;
