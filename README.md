@@ -20,14 +20,14 @@ void AddVertex(int vertex, Graph* graph);
 void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S);
 
 #Feitos Kariny
---modifiquei a funçao GetAdjacentVertices para poder retornar uma struct do tipo Edge;
---fiz a funçao auxiliar Relaxation, usada no Djkistra;
---fiz o Djkistra;(retorna um grafo, com o menor caminho).
+- modifiquei a funçao GetAdjacentVertices para poder retornar uma struct do tipo Edge;
+- fiz a funçao auxiliar Relaxation, usada no Djkistra;
+- fiz o Djkistra;(retorna um grafo, com o menor caminho).
 
 
 #To do
---Funçao para receber os parametros de entrada.
---Encontrar os k menores caminhos.
+- Funçao para receber os parametros de entrada.
+- Encontrar os k menores caminhos.
 
 ###OBS1 do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo sem pular numeros.
 
