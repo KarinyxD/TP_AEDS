@@ -26,6 +26,7 @@ void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S);
 
 
 #To do
+--Funçao para receber os parametros de entrada.
 --Encontrar os k menores caminhos.
 
 ###OBS1 do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo sem pular numeros.
