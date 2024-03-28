@@ -4,15 +4,16 @@
 
 void main(){
     Graph * graph = CreateEmptyGraph();
-    InsertEdge(0, 1, 1, graph);
-    InsertEdge(0, 2, 2, graph);
-    InsertEdge(0, 3, 3, graph);
-    InsertEdge(0, 4, 4, graph);
     InsertEdge(1, 2, 10, graph);
     InsertEdge(1, 4, 5, graph);
-    InsertEdge(1, 6, 50, graph);
-    InsertEdge(2, 3, 3, graph);
     InsertEdge(3, 4, 2, graph);
+    // InsertEdge(1, 6, 5, graph);   
+    // InsertEdge(0, 1, 1, graph);
+    // InsertEdge(0, 2, 2, graph);
+    // InsertEdge(0, 3, 30, graph);
+    InsertEdge(2, 3, 3, graph);
+    InsertEdge(2, 5, 10, graph);
+    InsertEdge(5, 6, 30, graph);
     InsertEdge(4, 5, 71, graph);
     // RemoveEdge(1, 2, 1, graph);
     // RemoveEdge(1, 4, 5, graph);
@@ -29,7 +30,7 @@ void main(){
     // FreeGraph(grapht);
 
     Graph* spath; 
-    spath = Dijkstra(graph);
+    spath = Dijkstra(1, graph);
     PrintGraph(graph);
     PrintGraph(spath);
     FreeGraph(spath);

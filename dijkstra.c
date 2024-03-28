@@ -25,47 +25,38 @@ void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S){
         i++;
     }
     free(AdjVertices);
-    // printf("While x: \n");
-    // for(int i = 0; i < 2 ; i++){
-    //     for(int j= 0; j < numVertices; j++){
-    //         printf("%d ", vpc[i][j]);
-    //     }
-    //     printf("\n");
-    // }
 }
 
-Graph* Dijkstra(Graph* graph){
+Graph* Dijkstra(int v1, Graph* graph){
     Graph* spath = CreateEmptyGraph();
 
     int numVertices = graph->numVertices;
-    int *S = (int*)malloc(numVertices * sizeof(int));    
+    int *S = (int*)malloc((numVertices+1) * sizeof(int));    
     int **vpc = (int**)malloc(2 * sizeof(int*)); // Aloca as linhas da matriz    
     for (int i = 0; i < 2; i++) {
-        vpc[i] = (int*)malloc(numVertices * sizeof(int)); // Aloca as colunas da matriz
+        vpc[i] = (int*)malloc((numVertices+1) * sizeof(int)); // Aloca as colunas da matriz
     }
-    for (int i = 0; i < numVertices; i++){
+    //inicialization
+    for (int i = 1; i < numVertices+1; i++){
         vpc[0][i], S[i] = -1;
         vpc[1][i] = INT_MAX;
     }
-    vpc[1][0] = 0;
-    S[0] = 0;
+    vpc[1][v1] = 0;
+    S[0] = v1;
 
-    int i = 0;
+    int i = v1;
     
     while(i < numVertices){
         Relaxation(numVertices, vpc, i, graph, S);
         S[i] = graph->vertexList[i].value;
         i++;
     }
-
-    AddVertex(0, spath);
-    for (int i = 1; i < numVertices; i++){
+    
+    //AddVertex(1, spath);
+    for (int i = 2; i <= numVertices; i++){
         InsertEdge(vpc[0][i], i, vpc[1][i], spath);
     }
-    
-    for (int j = 0; j < 2; j++) {
-        free(vpc[j]);
-    }
+
     free(vpc);
     free(S);
     return spath;
