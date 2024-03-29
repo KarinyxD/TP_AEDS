@@ -1,9 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
+#include <sys/resource.h>
 #include "graph.h"
 #include "entry.h"
 
 int main(int argc, char *argv[]){
+    // measuring execution and processing time
+    struct timeval start, end;
+    struct rusage usage;
+    gettimeofday(&start, NULL);  // start time
+
     // verifying if the arguments are correct
     Arguments args = parse_arguments(argc, argv);
 
@@ -28,6 +35,16 @@ int main(int argc, char *argv[]){
 
     // print graph
     PrintGraph(graph);
+
+    // printing execution time
+    gettimeofday(&end, NULL);  // end time
+    long seconds = end.tv_sec - start.tv_sec;
+    long micros = ((seconds * 1000000) + end.tv_usec) - (start.tv_usec);
+    printf("Elapsed time: %ld seconds and %ld microseconds\n", seconds, micros);
+
+    // printing CPU usage
+    getrusage(RUSAGE_SELF, &usage);
+    printf("CPU usage: %ld seconds and %ld microseconds\n", usage.ru_utime.tv_sec, usage.ru_utime.tv_usec);
 
     return 0;
 }
