@@ -8,6 +8,7 @@ typedef struct {
 } Arguments;
 
 Arguments parse_arguments(int argc, char *argv[]);
-FILE* open_file(char *filename);
+FILE* open_file(char *filename, char *mode);
 void read_line(FILE* file, int *n_vertices, int *n_caminhos, int *k_caminhos);
+
 #endif

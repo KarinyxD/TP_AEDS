@@ -17,8 +17,8 @@ Arguments parse_arguments(int argc, char *argv[]){
     return args;
 }
 
-FILE* open_file(char *filename){
-    FILE *file = fopen(filename, "r");
+FILE* open_file(char *filename, char *mode){
+    FILE *file = fopen(filename, mode);
     if (file == NULL){
         printf("Error opening file %s\n", filename);
         exit(EXIT_FAILURE);

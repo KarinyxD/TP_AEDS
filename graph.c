@@ -191,3 +191,9 @@ Graph* TransposeGraph(Graph* graph){
     }
     return grapht;
 }
+
+void Shortest_paths(int kCaminhos, int *S, Graph* graph){
+    for (int i = 0; i < kCaminhos; i++){
+        S[i] = i;
+    }
+}
