@@ -46,5 +46,12 @@ int main(int argc, char *argv[]){
     getrusage(RUSAGE_SELF, &usage);
     printf("CPU usage: %ld seconds and %ld microseconds\n", usage.ru_utime.tv_sec, usage.ru_utime.tv_usec);
 
+    // free memory and close file
+    free(numArestas);
+    free(numVertices);
+    free(kCaminhos);
+    FreeGraph(graph);  // assuming you have a function to free the graph
+    fclose(file);
+
     return 0;
 }
