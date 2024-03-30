@@ -3,6 +3,12 @@
 #include <stdlib.h>
 #include <limits.h>
 
+//Get k shortest pathsi
+void Shortest_paths(int kCaminhos, int *S, Graph* graph){
+    Paths *paths = (Paths*)malloc((kCaminhos)*sizeof(Paths)); 
+}
+
+
 //Get nearest unvisited vertex
 void Relaxation(int numVertices, Min_costs* pc, int v1, Graph* graph, int *S){
 
@@ -27,7 +33,7 @@ void Relaxation(int numVertices, Min_costs* pc, int v1, Graph* graph, int *S){
     free(AdjVertices);
 }
 
-Graph* Dijkstra(Graph* graph){
+Graph* Dijkstra(int vf, Graph* graph){
     // int *path_cost = (int*)malloc(sizeof(int));
     Graph* spath = CreateEmptyGraph();
     int numVertices = graph->numVertices;
@@ -42,17 +48,21 @@ Graph* Dijkstra(Graph* graph){
         S[i] = -1;
     }
     pc[1].cost = 0;
-    int i = 1;
+    int current = 1;
     
-    while(i <= numVertices){
-        Relaxation(numVertices, pc, i, graph, S);
-        S[i] = graph->vertexList[i-1].value;
-        i++;
+    while(pc[vf].cost == INT_MAX){
+        Relaxation(numVertices, pc, current, graph, S);
+        S[current] = current;
+        current = current + 1;
+        printf("%d\n", current);
+    
     }
 
     //populating graph
-    for (int i = 2; i <= numVertices; i++){
-        InsertEdge(pc[i].predecessor, i, pc[i].cost, spath);
+    for (int i = 2; i <= vf; i++){
+        if(pc[i].cost != INT_MAX){
+            InsertEdge(pc[i].predecessor, i, pc[i].cost, spath);
+        }
         // if(i == numVertices){
         //     *path_cost = pc[i].cost;
         // } 
@@ -61,3 +71,6 @@ Graph* Dijkstra(Graph* graph){
     free(S);
     return spath;
 }
+
+
+
