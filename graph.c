@@ -209,91 +209,87 @@ int GetEdgeWeight(int v1, int v2, Graph* graph){
     return -1;
 }
 
-void Djikstra(int v1, int v2, Graph* graph){
-    // create the set Q with all the vertices in the graph
-    VertexSet* Q = (VertexSet*)malloc(sizeof(VertexSet));
-    VertexPath* vertexPath = (VertexPath*)malloc(graph->numVertices * sizeof(VertexPath));
-    Q->numVertices = graph->numVertices;
-    Q->vertexPathList = vertexPath;
+// void Djikstra(int v1, int v2, Graph* graph){
+//     // create the set Q with all the vertices in the graph
+//     VertexSet* Q = (VertexSet*)malloc(sizeof(VertexSet));
+//     VertexPath* vertexPath = (VertexPath*)malloc(graph->numVertices * sizeof(VertexPath));
+//     Q->numVertices = graph->numVertices;
+//     Q->vertexPathList = vertexPath;
 
-    // create the set S with no vertices
-    VertexSet* S = (VertexSet*)malloc(sizeof(VertexSet));
-    VertexPath* vertexPathAux = (VertexPath*)malloc(graph->numVertices * sizeof(VertexPath));
-    S->numVertices = 0;
-    S->vertexPathList = vertexPathAux;
+//     // create the set S with no vertices
+//     VertexSet* S = (VertexSet*)malloc(sizeof(VertexSet));
+//     VertexPath* vertexPathAux = (VertexPath*)malloc(graph->numVertices * sizeof(VertexPath));
+//     S->numVertices = 0;
+//     S->vertexPathList = vertexPathAux;
 
-    // inicialize the array S
-    // with 0 for vertice 1
-    // and INT_MAX for the others
-    for (int i = 0; i < Q->numVertices; i++){
-        if (graph->vertexList[i].value == 1){
-            Q->vertexPathList[i].vertex = graph->vertexList[i].value;
-            Q->vertexPathList[i].shortestPathWeight = 0;
-        } else {
-            Q->vertexPathList[i].vertex = graph->vertexList[i].value;
-            Q->vertexPathList[i].shortestPathWeight = INT_MAX;
-        }
-    }
+//     // inicialize the array S
+//     // with 0 for vertice 1
+//     // and INT_MAX for the others
+//     for (int i = 0; i < Q->numVertices; i++){
+//         if (graph->vertexList[i].value == 1){
+//             Q->vertexPathList[i].vertex = graph->vertexList[i].value;
+//             Q->vertexPathList[i].shortestPathWeight = 0;
+//         } else {
+//             Q->vertexPathList[i].vertex = graph->vertexList[i].value;
+//             Q->vertexPathList[i].shortestPathWeight = INT_MAX;
+//         }
+//     }
 
-    // while Q is not empty
-    while (0 != Q->numVertices){
-        // get the index of the vertex with the smallest shortest path weight
-        // in the Q set
-        int smallest = INT_MAX;
-        // index of the vertex with the smallest shortest path weight
-        int index = 0;
+//     // while Q is not empty
+//     while (0 != Q->numVertices){
+//         // get the index of the vertex with the smallest shortest path weight
+//         // in the Q set
+//         int smallest = INT_MAX;
+//         // index of the vertex with the smallest shortest path weight
+//         int index = 0;
 
-        for (int i = 0; i < Q->numVertices; i++){
-            // need to check if the vertex is not in S
-            if (Q->vertexPathList[i].shortestPathWeight < smallest && Q->vertexPathList[i].vertex != -1){
-                smallest = Q->vertexPathList[i].shortestPathWeight;
-                index = i;
-            }
-        }
+//         for (int i = 0; i < Q->numVertices; i++){
+//             // need to check if the vertex is not in S
+//             if (Q->vertexPathList[i].shortestPathWeight < smallest && Q->vertexPathList[i].vertex != -1){
+//                 smallest = Q->vertexPathList[i].shortestPathWeight;
+//                 index = i;
+//             }
+//         }
 
-        // add the vertex with the smallest shortest path weight to S and remove it from Q set turning its value to -1
-        S->vertexPathList[S->numVertices] = Q->vertexPathList[index];
-        S->numVertices++;
-        Q->vertexPathList[index].vertex = -1;
-        Q->numVertices--;
+//         // add the vertex with the smallest shortest path weight to S and remove it from Q set turning its value to -1
+//         S->vertexPathList[S->numVertices] = Q->vertexPathList[index];
+//         S->numVertices++;
+//         Q->vertexPathList[index].vertex = -1;
+//         Q->numVertices--;
 
-        // get the list of adjacent vertices of the vertex with the smallest shortest path weight
-        Edge* adjacentVertices = GetAdjacentVertices(S->vertexPathList[S->numVertices - 1].vertex, graph);
-        Edge* adjacentVerticesAux = adjacentVertices;
+//         // get the list of adjacent vertices of the vertex with the smallest shortest path weight
+//         Edge* adjacentVertices = GetAdjacentVertices(S->vertexPathList[S->numVertices - 1].vertex, graph);
+//         Edge* adjacentVerticesAux = adjacentVertices;
 
-        // for each adjacent vertex, update its shortest path weight if it is smaller than the current shortest path weight
-        while (adjacentVertices->v1 != -1){
-            // find the vertex in Q set
-            for (int i = 0; i < Q->numVertices; i++){
-                // if the vertex is in the Q set
-                // and the vertex is adjacent to the vertex with the smallest shortest path weight
-                // change its shortest path weight if it is smaller than the current shortest path weight
-                if (Q->vertexPathList[i].vertex == adjacentVertices->v1){
-                    if (Q->vertexPathList[i].shortestPathWeight > S->vertexPathList[S->numVertices - 1].shortestPathWeight + adjacentVertices->weight){
-                        Q->vertexPathList[i].shortestPathWeight = S->vertexPathList[S->numVertices - 1].shortestPathWeight + adjacentVertices->weight;
-                        Q->vertexPathList[i].previousVertex = S->vertexPathList[S->numVertices - 1].vertex;
-                    }
-                    break;
-                }
-            }
-            adjacentVertices++;
-        }
-        // create a graph with the shortest path
-        // create a graph with the shortest path
-        free(adjacentVerticesAux);
-    }
+//         // for each adjacent vertex, update its shortest path weight if it is smaller than the current shortest path weight
+//         while (adjacentVertices->v1 != -1){
+//             // find the vertex in Q set
+//             for (int i = 0; i < Q->numVertices; i++){
+//                 // if the vertex is in the Q set
+//                 // and the vertex is adjacent to the vertex with the smallest shortest path weight
+//                 // change its shortest path weight if it is smaller than the current shortest path weight
+//                 if (Q->vertexPathList[i].vertex == adjacentVertices->v1){
+//                     if (Q->vertexPathList[i].shortestPathWeight > S->vertexPathList[S->numVertices - 1].shortestPathWeight + adjacentVertices->weight){
+//                         Q->vertexPathList[i].shortestPathWeight = S->vertexPathList[S->numVertices - 1].shortestPathWeight + adjacentVertices->weight;
+//                         Q->vertexPathList[i].previousVertex = S->vertexPathList[S->numVertices - 1].vertex;
+//                     }
+//                     break;
+//                 }
+//             }
+//             adjacentVertices++;
+//         }
+//         // create a graph with the shortest path
+//         // create a graph with the shortest path
+//         free(adjacentVerticesAux);
+//     }
 
-    Graph* shortestPathGraph = CreateEmptyGraph();
-    for (int i = 0; i < S->numVertices; i++){
-        // get the weight of the edge from the original graph
-        int weight = GetEdgeWeight(S->vertexPathList[i].previousVertex, S->vertexPathList[i].vertex, graph);
-        InsertEdge(S->vertexPathList[i].previousVertex, S->vertexPathList[i].vertex, weight, shortestPathGraph);
-    }
-    PrintGraph(shortestPathGraph);
-}
+//     Graph* shortestPathGraph = CreateEmptyGraph();
+//     for (int i = 0; i < S->numVertices; i++){
+//         // get the weight of the edge from the original graph
+//         int weight = GetEdgeWeight(S->vertexPathList[i].previousVertex, S->vertexPathList[i].vertex, graph);
+//         InsertEdge(S->vertexPathList[i].previousVertex, S->vertexPathList[i].vertex, weight, shortestPathGraph);
+//     }
+//     PrintGraph(shortestPathGraph);
+// }
 
-void Shortest_paths(int kCaminhos, int *S, Graph* graph){
-    // Djikstra's algorithm for shortest path
-    // beetween two vertices
-    return;
-}
+//Get k shortest pathsi

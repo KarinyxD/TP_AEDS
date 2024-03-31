@@ -20,16 +20,7 @@ typedef struct {
     Vertex* vertexList;
 } Graph;
 
-typedef struct {
-    int vertex;
-    int shortestPathWeight;
-    int previousVertex;
-} VertexPath;
 
-typedef struct {
-    int numVertices;
-    VertexPath* vertexPathList;
-} VertexSet;
 
 // Function declarations
 Graph* CreateEmptyGraph();
@@ -42,7 +33,5 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
-void Shortest_paths(int kCaminhos, int * S, Graph* graph);
-void Djikstra(int v1, int v2, Graph* graph);
 
 #endif

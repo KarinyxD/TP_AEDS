@@ -4,6 +4,7 @@
 #include <sys/resource.h>
 #include "graph.h"
 #include "entry.h"
+#include "shortestPaths.h"
 
 int main(int argc, char *argv[]){
     // measuring execution and processing time
@@ -36,8 +37,7 @@ int main(int argc, char *argv[]){
     int *S = (int*)malloc(sizeof(int) * kCaminhos);
 
     // calculating the shortest path
-    PrintGraph(graph);
-    Djikstra(1, 4, graph);
+    Shortest_paths(6, 3, graph);
 
     // calculating the k shortest paths
     // Shortest_paths(kCaminhos, S, graph);
