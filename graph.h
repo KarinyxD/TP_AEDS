@@ -41,6 +41,7 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
-void Shortest_paths(int kCaminhos, int * S, Graph* graph);
-Graph* Dijkstra(int vf, Graph* graph);
+void Shortest_paths(int vf, int kCaminhos, Graph* graph);
+void Dijkstra(int vf, Graph* graph, Min_costs* pc);
+void CreateMinPath(Graph* graph, Paths* paths, Min_costs* pc, int index);
 #endif

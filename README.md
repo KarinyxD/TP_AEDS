@@ -22,7 +22,7 @@ void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S);
 #Feitos Kariny
 - modifiquei a funçao GetAdjacentVertices para poder retornar uma struct do tipo Edge;
 - fiz a funçao auxiliar Relaxation, usada no Djkistra;
-- fiz o Djkistra;(retorna um grafo, com o menor caminho).
+- fiz o Djkistra;(retorna um grafo, com o menor caminho de 1 ate o vertice escolhido).
 
 
 #To do

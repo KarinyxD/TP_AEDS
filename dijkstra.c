@@ -3,9 +3,54 @@
 #include <stdlib.h>
 #include <limits.h>
 
+void CreateMinPath(Graph* graph, Paths* paths, Min_costs* pc, int index){
+
+    //populating graph
+    int i = graph->numVertices; //last vertice
+    paths[index].cost = pc[i].cost;
+    while (i != 1){
+        InsertEdge(pc[i].predecessor, i, pc[i].cost, paths[index].route);
+        i = pc[i].predecessor;        
+    }
+}
+
 //Get k shortest pathsi
-void Shortest_paths(int kCaminhos, int *S, Graph* graph){
-    Paths *paths = (Paths*)malloc((kCaminhos)*sizeof(Paths)); 
+void Shortest_paths(int vf, int kCaminhos, Graph* graph){
+    int *path_cost = (int*)malloc(sizeof(int));
+    Paths *paths = (Paths*)malloc((kCaminhos)*sizeof(Paths));
+    paths[0].route = CreateEmptyGraph();
+    Min_costs* pc = (Min_costs*)malloc((graph->numVertices+1)*sizeof(Min_costs)); //predecessors and costs(pc)
+   
+    printf("vf: %d.\n", vf); 
+    
+    Dijkstra(vf, graph, pc);
+    int index = 0;
+    CreateMinPath(graph, paths, pc, index);
+    index ++; 
+    // printf("Custo: %d.\n", paths[0].cost);
+    PrintGraph(paths[0].route);
+
+    // pc[1].cost = 0;
+    // int current = 1;
+    // int check = 1;
+    
+    // while(current != vf || check <= kCaminhos){
+    //     Relaxation(numVertices, pc, current, graph, S);
+    //     current = paths[0]->route;
+       
+    //    //checks if S has any unvisited vertices
+    //     for (int i = 1; i <= numVertices; ++i) {
+    //         if (S[i] == -1) {check = 1;}
+    //         else{check = 0;}
+    //     }
+    // }
+
+    // for(int i = 0; i < kCaminhos; i++){
+    //     FreeGraph(&paths[i].route);
+    //     free(paths);
+    // }
+    // free(path_cost);
+    // FreeGraph(paths);
 }
 
 
@@ -22,6 +67,7 @@ void Relaxation(int numVertices, Min_costs* pc, int v1, Graph* graph, int *S){
         //         check = 1;
         //     }
         // }
+        printf("AdjVertice de %d: %d\n", v1, AdjVertices[i].v2);
         int sum = AdjVertices[i].weight + pc[v1].cost;
         if (pc[AdjVertices[i].v2].cost > sum){
             pc[AdjVertices[i].v2].cost = sum;
@@ -33,13 +79,10 @@ void Relaxation(int numVertices, Min_costs* pc, int v1, Graph* graph, int *S){
     free(AdjVertices);
 }
 
-Graph* Dijkstra(int vf, Graph* graph){
-    // int *path_cost = (int*)malloc(sizeof(int));
-    Graph* spath = CreateEmptyGraph();
+void Dijkstra(int vf, Graph* graph, Min_costs* pc){
     int numVertices = graph->numVertices;
     int *S = (int*)malloc((numVertices+1) * sizeof(int));    
     
-    Min_costs* pc = (Min_costs*)malloc((numVertices+1)*sizeof(Min_costs)); //predecessors and costs(pc)
     
     //inicialization
     for (int i = 1; i <= numVertices; i++){
@@ -49,28 +92,25 @@ Graph* Dijkstra(int vf, Graph* graph){
     }
     pc[1].cost = 0;
     int current = 1;
+    int check = 1;
     
-    while(pc[vf].cost == INT_MAX){
+    while(check == 1){
         Relaxation(numVertices, pc, current, graph, S);
         S[current] = current;
         current = current + 1;
-        printf("%d\n", current);
-    
+       
+       //checks if S has any unvisited vertices
+        for (int i = 1; i <= numVertices; ++i) {
+            if (S[i] == -1) {check = 1;}
+            else{check = 0;}
+        }
     }
 
-    //populating graph
-    for (int i = 2; i <= vf; i++){
-        if(pc[i].cost != INT_MAX){
-            InsertEdge(pc[i].predecessor, i, pc[i].cost, spath);
-        }
-        // if(i == numVertices){
-        //     *path_cost = pc[i].cost;
-        // } 
-    } 
-    free(pc);
+    // for (int i = 2; i <= vf; i++){
+    //     if(pc[i].cost != INT_MAX){
+    //         InsertEdge(pc[i].predecessor, i, pc[i].cost, spath);
+    //     }
+
     free(S);
-    return spath;
 }
-
-
 
