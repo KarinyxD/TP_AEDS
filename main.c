@@ -35,8 +35,12 @@ int main(int argc, char *argv[]){
     // allocating memory for the k paths size
     int *S = (int*)malloc(sizeof(int) * kCaminhos);
 
+    // calculating the shortest path
+    PrintGraph(graph);
+    Djikstra(1, 4, graph);
+
     // calculating the k shortest paths
-    Shortest_paths(kCaminhos, S, graph);
+    // Shortest_paths(kCaminhos, S, graph);
 
     // cleaning the output and opening file
     FILE* output = open_file(args.outputFile, "w");
