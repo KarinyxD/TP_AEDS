@@ -32,4 +32,5 @@ void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
 void Shortest_paths(int kCaminhos, int * S, Graph* graph);
+
 #endif
