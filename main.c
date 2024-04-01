@@ -8,12 +8,13 @@
 void main(){
     Graph * graph = CreateEmptyGraph();
     // InsertEdge(1, 2, 1, graph);
+    // InsertEdge(1,7, 24, graph);
     // InsertEdge(6,7,10, graph);
-    // InsertEdge(2, 3, 1, graph);
+    // InsertEdge(2, 3, 3, graph);
     // InsertEdge(3, 5, 1, graph);
     // InsertEdge(5, 6, 1, graph);
     // InsertEdge(3, 4, 2, graph);
-
+    
     InsertEdge(1, 2, 1, graph);
     InsertEdge(2, 3, 1, graph);
     InsertEdge(3, 4, 1, graph);
@@ -21,6 +22,7 @@ void main(){
     InsertEdge(5, 4, 1, graph);
     InsertEdge(5, 6, 10, graph);
     InsertEdge(4, 6, 5, graph);
+    
     // RemoveEdge(1, 2, 1, graph);
     // RemoveEdge(1, 4, 5, graph);
     // RemoveEdge(2, 3, 1, graph);
@@ -34,7 +36,7 @@ void main(){
     // PrintGraph(grapht);
     // FreeGraph(grapht);
 
-    Shortest_paths(6, 3, graph);
+    Shortest_paths(1, 6, 3, graph);
     PrintGraph(graph);
     FreeGraph(graph);
 }
