@@ -104,13 +104,16 @@ Edge* GetAdjacentVertices(int v, Graph* graph){
         if (graph->vertexList[i].value == v){
             Vertex* current = &graph->vertexList[i];
             while(current->next != NULL){
+                adjacentVertices[count].v1 = v;
                 adjacentVertices[count].v2 = current->next->value;
                 adjacentVertices[count].weight = current->next->weight;
                 count++;
                 current = current->next;
             }
             // making the last element of the list -1
+            adjacentVertices[count].v1 = -1;
             adjacentVertices[count].v2 = -1;
+            adjacentVertices[count].weight = -1;
             break;
         }
     }
@@ -169,7 +172,7 @@ Edge RemoveMinEdge(Graph* graph){
         }
     }
     RemoveEdge(edge.v1, edge.v2, edge.weight,graph);
-    printf("The minimum edge between %d e %d, with weight = %d was delete!\n", edge.v1, edge.v2, edge.weight);
+    // printf("The minimum edge between %d e %d, with weight = %d was delete!\n", edge.v1, edge.v2, edge.weight);
     return edge;
 }
 
@@ -190,4 +193,69 @@ Graph* TransposeGraph(Graph* graph){
         }
     }
     return grapht;
+}
+int GetEdgeWeight(int v1, int v2, Graph* graph){
+    for (int i = 0; i < graph->numVertices; i++){
+        if (graph->vertexList[i].value == v1){
+            Vertex* current = graph->vertexList[i].next;
+            while(current != NULL){
+                if (current->value == v2){
+                    return current->weight;
+                }
+                current = current->next;
+            }
+        }
+    }
+    return -1;
+}
+int EqualGraphs(Graph* graph1, Graph* graph2){
+    if (graph1->numVertices != graph2->numVertices){
+        return 0;
+    }
+    // copy the two graphs
+    Graph* graph1Copy = CreateEmptyGraph();
+    Graph* graph2Copy = CreateEmptyGraph();
+
+    for (int i = 0; i < graph1->numVertices; i++){
+        AddVertex(graph1->vertexList[i].value, graph1Copy);
+    }
+    for (int i = 0; i < graph2->numVertices; i++){
+        AddVertex(graph2->vertexList[i].value, graph2Copy);
+    }
+
+    // now copy the edges for each vertex
+    for (int i = 0; i < graph1->numVertices; i++){
+        Vertex* current = graph1->vertexList[i].next;
+        while(current != NULL){
+            InsertEdge(graph1->vertexList[i].value, current->value, current->weight, graph1Copy);
+            current = current->next;
+        }
+    }
+
+    for (int i = 0; i < graph2->numVertices; i++){
+        Vertex* current = graph2->vertexList[i].next;
+        while(current != NULL){
+            InsertEdge(graph2->vertexList[i].value, current->value, current->weight, graph2Copy);
+            current = current->next;
+        }
+    }
+
+    // check if the two graphs are equal
+    // removing the minimum edge from each graph until there are no more edges
+    // if Edge.weight is INT_MAX, there are no more edges to be removed
+    while (1){
+        Edge edge1 = RemoveMinEdge(graph1Copy);
+        Edge edge2 = RemoveMinEdge(graph2Copy);
+        if (edge1.weight != edge2.weight || edge1.v1 != edge2.v1 || edge1.v2 != edge2.v2){
+            FreeGraph(graph1Copy);
+            FreeGraph(graph2Copy);
+            return 0;
+        }
+        if (edge1.weight == INT_MAX && edge2.weight == INT_MAX){
+            free(graph1Copy);
+            free(graph2Copy);
+            return 1;
+            break;
+        }
+    }
 }

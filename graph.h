@@ -20,15 +20,7 @@ typedef struct {
     Vertex* vertexList;
 } Graph;
 
-typedef struct{
-    int predecessor;
-    int cost;
-}Min_costs;
 
-typedef struct{
-    Graph* route;
-    int cost;
-}Paths;
 
 // Function declarations
 Graph* CreateEmptyGraph();
@@ -41,7 +33,6 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
-void Shortest_paths(int vi, int vf, int kCaminhos, Graph* graph);
-void Dijkstra(int vi, int vf, Graph* graph, Min_costs* pc, int initial_cost);
-void CreateMinPath(Graph* graph, Paths* paths, Min_costs* pc, int index);
+int EqualGraphs(Graph* graph1, Graph* graph2);
+
 #endif

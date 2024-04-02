@@ -3,40 +3,68 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include "graph.h"
+#include "shortestPaths.h"
 #include "entry.h"
+// #include "shortestPaths.h"
 
-void main(){
-    Graph * graph = CreateEmptyGraph();
-    // InsertEdge(1, 2, 1, graph);
-    // InsertEdge(1,7, 24, graph);
-    // InsertEdge(6,7,10, graph);
-    // InsertEdge(2, 3, 3, graph);
-    // InsertEdge(3, 5, 1, graph);
-    // InsertEdge(5, 6, 1, graph);
-    // InsertEdge(3, 4, 2, graph);
-    
-    InsertEdge(1, 2, 1, graph);
-    InsertEdge(2, 3, 1, graph);
-    InsertEdge(3, 4, 1, graph);
-    InsertEdge(4, 5, 1, graph);
-    InsertEdge(5, 4, 1, graph);
-    InsertEdge(5, 6, 10, graph);
-    InsertEdge(4, 6, 5, graph);
-    
-    // RemoveEdge(1, 2, 1, graph);
-    // RemoveEdge(1, 4, 5, graph);
-    // RemoveEdge(2, 3, 1, graph);
-    // RemoveEdge(4, 5, 1, graph);
-    // Edge edge[5];
-    // for (int i = 0; i < 5; i++){
-    //     edge[i] = RemoveMinEdge(graph);
-    // }
-    // FreeGraph(graph);
-    // Graph* grapht = TransposeGraph(graph);
-    // PrintGraph(grapht);
-    // FreeGraph(grapht);
+int main(int argc, char *argv[]){
+    // measuring execution and processing time
+    struct timeval start, end;
+    struct rusage usage;
+    gettimeofday(&start, NULL);  // start time
 
-    Shortest_paths(1, 6, 3, graph);
-    PrintGraph(graph);
-    FreeGraph(graph);
+    // verifying if the arguments are correct
+    Arguments args = parse_arguments(argc, argv);
+
+    // reading arg_i file
+    FILE* file = open_file(args.inputFile, "r");
+
+    // getting the number of vertices, edges and k paths from file
+    int numArestas, numVertices, kCaminhos;
+    read_line(file, &numVertices, &numArestas, &kCaminhos);
+    printf("numVertices: %d, numArestas: %d, kCaminhos: %d\n", numVertices, numArestas, kCaminhos);
+    
+    // building graph
+    Graph* graph = CreateEmptyGraph();
+
+    // inserting data into graph
+    for (int i = 0; i < numArestas; i++){
+        int v1, v2, weight;
+        read_line(file, &v1, &v2, &weight);
+        InsertEdge(v1, v2, weight, graph);
+    }
+
+    // allocating memory for the k paths size
+    int *S = (int*)malloc(sizeof(int) * kCaminhos);
+
+    // calculating the shortest path
+    Shortest_paths(1, numVertices, kCaminhos, graph);
+
+    // calculating the k shortest paths
+    // Shortest_paths(kCaminhos, S, graph);
+
+    // cleaning the output and opening file
+    FILE* output = open_file(args.outputFile, "w");
+    // printing the k shortest paths in output file
+    for (int i = 0; i < kCaminhos; i++){
+        fprintf(output, "%d ", S[i]);
+    }
+
+    // free memory and close file
+    FreeGraph(graph);  // assuming you have a function to free the graph
+    fclose(file);
+    fclose(output);
+    free(S);
+
+    // printing execution time
+    gettimeofday(&end, NULL);  // end time
+    long seconds = end.tv_sec - start.tv_sec;
+    long micros = ((seconds * 1000000) + end.tv_usec) - (start.tv_usec);
+    printf("Elapsed time: %ld seconds and %ld microseconds\n", seconds, micros);
+
+    // printing CPU usage
+    getrusage(RUSAGE_SELF, &usage);
+    printf("CPU usage: %ld seconds and %ld microseconds\n", usage.ru_utime.tv_sec, usage.ru_utime.tv_usec);
+
+    return 0;
 }
