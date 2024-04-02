@@ -22,14 +22,19 @@ void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S);
 #Feitos Kariny
 - modifiquei a funçao GetAdjacentVertices para poder retornar uma struct do tipo Edge;
 - fiz a funçao auxiliar Relaxation, usada no Djkistra;
-- fiz o Djkistra;(retorna um grafo, com o menor caminho de 1 ate o vertice escolhido).
+- fiz o Djkistra;
 
 
 #To do
-- Funçao para receber os parametros de entrada.
-- Encontrar os k menores caminhos.
+- Testar outros casos.
+- Armazenar os valores dos k's no output.txt.
+- Fazer documentação.
+- Fazer a analise de complexidade do algoritmo.
+- Melhorias no código, se necessário(e se tiver tempo).
 
 ###OBS1 do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo sem pular numeros.
+###OBS2 do programa: provavelmente nao esta encontrando os menores caminhos que possuem ciclos.(passando na mesma aresta mais de uma vez).
 
-###OBS2 funçao djkistra: os pesos retornados no grafo (do menor caminho), são os pesos dos vertices anteriores somados. 
-o peso do ultimo vértice, corresponde ao custo total do caminho.
+###OBS2 funçao djkistra: os pesos dos grafos dos menores caminhos, são os pesos dos vertices anteriores somados. 
+Ou seja, o custo minimo para chegar em cada vertice.
+O peso do ultimo vértice, corresponde ao custo total do caminho.
