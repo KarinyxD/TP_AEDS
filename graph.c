@@ -137,7 +137,7 @@ void RemoveEdge(int v1, int v2, int weight, Graph* graph){
                 prev = current;
                 current = current->next;
             }
-            printf("Warning: Edge %d(%d) does not exist\n", v2, weight);
+            // printf("Warning: Edge %d(%d) does not exist\n", v2, weight);
             return;
         }
     }

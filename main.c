@@ -22,7 +22,6 @@ int main(int argc, char *argv[]){
     // getting the number of vertices, edges and k paths from file
     int numArestas, numVertices, kCaminhos;
     read_line(file, &numVertices, &numArestas, &kCaminhos);
-    printf("numVertices: %d, numArestas: %d, kCaminhos: %d\n", numVertices, numArestas, kCaminhos);
     
     // building graph
     Graph* graph = CreateEmptyGraph();
@@ -38,18 +37,16 @@ int main(int argc, char *argv[]){
     int *S = (int*)malloc(sizeof(int) * kCaminhos);
 
     // calculating the shortest path
-    Shortest_paths(1, numVertices, kCaminhos, graph);
-
-    // calculating the k shortest paths
-    // Shortest_paths(kCaminhos, S, graph);
+    Shortest_paths(1, 4, numArestas, kCaminhos, graph, S);
 
     // cleaning the output and opening file
     FILE* output = open_file(args.outputFile, "w");
     // printing the k shortest paths in output file
     for (int i = 0; i < kCaminhos; i++){
+        // printf("%d ", S[i]);
         fprintf(output, "%d ", S[i]);
     }
-
+    // printf("\n");
     // free memory and close file
     FreeGraph(graph);  // assuming you have a function to free the graph
     fclose(file);
