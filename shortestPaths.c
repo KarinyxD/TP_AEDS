@@ -78,7 +78,7 @@ void heapifyDown(MinHeap* minHeap, int index) {
 Priority_list removeMinCostElement(MinHeap* minHeap) {
     // Verifica se a heap está vazia
     if (minHeap->size <= 0) {
-        printf("Heap vazia. Não há elementos para remover.\n");
+        // printf("Heap vazia. Não há elementos para remover.\n");
         Priority_list null_value;
         null_value.v = -1; // Valor inválido para indicar que a heap está vazia
         null_value.cost = -1;
@@ -103,7 +103,7 @@ void freeMinHeap(MinHeap* minHeap) {
 }
 
 //Get k shortest paths
-void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, int* S){
+void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, int64_t* S){
     int count[graph->numVertices];
     MinHeap* list = createMinHeap(numArestas);
     for (int i = 0; i < graph->numVertices; i++){
@@ -115,7 +115,7 @@ void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph,
     Priority_list current = list->arr[0];
     int k = 0;
     //em quanto o contador de caminhos para o ultimo vertice for menor q kCaminhos, faça:
-    while(count[graph->numVertices-1] < kCaminhos){ 
+    while(count[graph->numVertices-1] < kCaminhos && list->size > 0){ 
         //procurar e remover o menor peso em list e armazenar em current
         current = removeMinCostElement(list);
 
@@ -131,7 +131,7 @@ void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph,
         //chamar relaxation pra salvar os custos dos vertices adjacentes ao current na lista 
         Relaxation(current, list, graph);
     }
-
+    S[k] = -1; //sinaliza o final da lista de kCaminhos
     freeMinHeap(list);
 
 }

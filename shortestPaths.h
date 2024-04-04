@@ -1,10 +1,11 @@
 #ifndef SHORTESTPATHS_H
 #define SHORTESTPATHS_H
+#include <stdint.h>
 
 // Estrutura para representar a lista da heap
 typedef struct{
     int v;
-    int cost;
+    int64_t cost;
 }Priority_list;
 
 // Estrutura para representar a heap
@@ -17,7 +18,7 @@ typedef struct {
 
 //Funcoes MinPath
 void Relaxation(Priority_list v_current, MinHeap* list, Graph* graph);
-void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, int* S);
+void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, int64_t* S);
 
 //Funçoes Heap
 void freeMinHeap(MinHeap* minHeap);

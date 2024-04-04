@@ -5,6 +5,7 @@
 #include "graph.h"
 #include "shortestPaths.h"
 #include "entry.h"
+#include <stdint.h>
 // #include "shortestPaths.h"
 
 int main(int argc, char *argv[]){
@@ -34,7 +35,7 @@ int main(int argc, char *argv[]){
     }
 
     // allocating memory for the k paths size
-    int *S = (int*)malloc(sizeof(int) * kCaminhos);
+    int64_t *S = (int64_t*)malloc(kCaminhos * sizeof(int64_t));
 
     // calculating the shortest path
     Shortest_paths(1, numVertices, numArestas, kCaminhos, graph, S);
@@ -42,9 +43,11 @@ int main(int argc, char *argv[]){
     // cleaning the output and opening file
     FILE* output = open_file(args.outputFile, "w");
     // printing the k shortest paths in output file
-    for (int i = 0; i < kCaminhos; i++){
-        printf("%d ", S[i]);
-        fprintf(output, "%d ", S[i]);
+    int i = 0;
+    while (S[i] != -1){
+        printf("%ld ", S[i]);
+        fprintf(output, "%ld ", S[i]);
+        i++;
     }
     printf("\n");
     // free memory and close file
