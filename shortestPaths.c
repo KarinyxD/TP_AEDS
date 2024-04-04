@@ -15,7 +15,7 @@ MinHeap* createMinHeap(int capacity) {
 }
 Priority_list getMinCostElement(MinHeap* minHeap) {
     Priority_list minElement;
-    minElement.cost = INT_MAX; // Inicializa o custo mínimo como o máximo possível
+    minElement.cost = LONG_MAX; // Inicializa o custo mínimo como o máximo possível
 
     // Percorre o array da heap para encontrar o elemento com o menor custo
     for (int i = 0; i < minHeap->size; i++) {
@@ -103,7 +103,7 @@ void freeMinHeap(MinHeap* minHeap) {
 }
 
 //Get k shortest paths
-void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, int64_t* S){
+void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, long long int* S){
     int count[graph->numVertices];
     MinHeap* list = createMinHeap(numArestas);
     for (int i = 0; i < graph->numVertices; i++){
@@ -143,7 +143,7 @@ void Relaxation(Priority_list v_current, MinHeap* list, Graph* graph){
     int i = 0;
     Priority_list AddinList;
     while(AdjVertices[i].v2 != -1){ //em quanto a lista de adj nao chegar ao fim
-        int sum = AdjVertices[i].weight + v_current.cost;
+        long long int sum = AdjVertices[i].weight + v_current.cost;
         AddinList.v = AdjVertices[i].v2;
         AddinList.cost = sum;
         insert(list, AddinList);

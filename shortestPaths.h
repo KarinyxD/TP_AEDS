@@ -5,7 +5,7 @@
 // Estrutura para representar a lista da heap
 typedef struct{
     int v;
-    int64_t cost;
+    long long int cost;
 }Priority_list;
 
 // Estrutura para representar a heap
@@ -18,7 +18,7 @@ typedef struct {
 
 //Funcoes MinPath
 void Relaxation(Priority_list v_current, MinHeap* list, Graph* graph);
-void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, int64_t* S);
+void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, long long int* S);
 
 //Funçoes Heap
 void freeMinHeap(MinHeap* minHeap);

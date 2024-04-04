@@ -29,7 +29,7 @@ void PrintGraph(Graph* graph){
         printf("Vertex %d has the following edges(weight): ", graph->vertexList[i].value);
         Vertex* current = &graph->vertexList[i];
         while(current->next != NULL){
-            printf("%d(%d) ", current->next->value, current->next->weight);
+            printf("%d(%lld) ", current->next->value, current->next->weight);
             current = current->next;
         }
         printf("\n");
@@ -38,7 +38,7 @@ void PrintGraph(Graph* graph){
 
 // void InsertEdge(int v1, int v2, int weight, Graph* graph);
 // function to insert an edge between two vertices
-void InsertEdge(int v1, int v2, int weight, Graph* graph){
+void InsertEdge(int v1, int v2, long long int weight, Graph* graph){
     int v1Exists = 0, v2Exists = 0;
 
     // Check if the vertices v1 and v2 existint weight;
@@ -120,7 +120,7 @@ Edge* GetAdjacentVertices(int v, Graph* graph){
     return adjacentVertices;
 }
 // remove an edge
-void RemoveEdge(int v1, int v2, int weight, Graph* graph){
+void RemoveEdge(int v1, int v2, long long int weight, Graph* graph){
     // find the vertex with value v1
     for (int i = 0; i < graph->numVertices; i++){
         // if the vertex is found, current is the vertex with value v1 and prev is the vertex before current
@@ -159,7 +159,7 @@ void FreeGraph(Graph* graph){
 //removes the smallest edge of the graph
 Edge RemoveMinEdge(Graph* graph){
     Edge edge;
-    edge.weight = INT_MAX;
+    edge.weight = LONG_MAX;
     for (int i = 0; i < graph->numVertices; i++){
         Vertex* current = graph->vertexList[i].next;
         while(current != NULL){
@@ -251,7 +251,7 @@ int EqualGraphs(Graph* graph1, Graph* graph2){
             FreeGraph(graph2Copy);
             return 0;
         }
-        if (edge1.weight == INT_MAX && edge2.weight == INT_MAX){
+        if (edge1.weight == LONG_MAX && edge2.weight == LONG_MAX){
             free(graph1Copy);
             free(graph2Copy);
             return 1;

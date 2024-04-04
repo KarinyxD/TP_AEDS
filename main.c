@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
     }
 
     // allocating memory for the k paths size
-    int64_t *S = (int64_t*)malloc((kCaminhos+1) * sizeof(int64_t));
+    long long int *S = (long long int*)malloc((kCaminhos+1) * sizeof(long long int));
 
     // calculating the shortest path
     Shortest_paths(1, numVertices, numArestas, kCaminhos, graph, S);
@@ -45,8 +45,8 @@ int main(int argc, char *argv[]){
     // printing the k shortest paths in output file
     int i = 0;
     while (S[i] != -1){
-        printf("%ld ", S[i]);
-        fprintf(output, "%ld ", S[i]);
+        printf("%lld ", S[i]);
+        fprintf(output, "%lld ", S[i]);
         i++;
     }
     printf("\n");
