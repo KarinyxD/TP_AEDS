@@ -39,14 +39,21 @@ void heapifyUp(MinHeap* minHeap, int index) {
     }
 }
 
-void insert(MinHeap* minheap, Priority_list key) {
-    // Inserir o novo elemento na heap
-    int index = minheap->size;
-    minheap->arr[index] = key;
-    minheap->size++;
+void insert(MinHeap* minHeap, Priority_list key) {
+    // Verifica se a heap está cheia
+    if (minHeap->size >= minHeap->capacity) {
+        // Realoca memória para aumentar a capacidade da heap
+        minHeap->capacity *= 2; // Por exemplo, pode dobrar a capacidade
+        minHeap->arr = realloc(minHeap->arr, minHeap->capacity * sizeof(Priority_list));
+    }
 
-    // Executar heapifyUp para manter as propriedades da heap
-    heapifyUp(minheap, index);
+    // Insere o novo elemento na heap
+    int index = minHeap->size;
+    minHeap->arr[index] = key;
+    minHeap->size++;
+
+    // Executa heapifyUp para manter as propriedades da heap
+    heapifyUp(minHeap, index);
 }
 
 // Função para ajustar a heap após remoção
@@ -78,24 +85,15 @@ Priority_list removeMinCostElement(MinHeap* minHeap) {
         return null_value;
     }
 
-    // Encontra o elemento com o menor custo
-    Priority_list minCostElement = getMinCostElement(minHeap);
-
-    // Encontra o índice do elemento com o menor custo
-    int index;
-    for (index = 0; index < minHeap->size; index++) {
-        if (minHeap->arr[index].cost == minCostElement.cost)
-            break;
-    }
-
     // Remove o elemento com o menor custo da heap
-    Priority_list removedElement = minHeap->arr[index];
-    minHeap->arr[index] = minHeap->arr[minHeap->size - 1];
+    Priority_list minCostElement = minHeap->arr[0];
+    minHeap->arr[0] = minHeap->arr[minHeap->size - 1];
     minHeap->size--;
-    heapifyDown(minHeap, index);
+    heapifyDown(minHeap, 0);
 
-    return removedElement;
+    return minCostElement;
 }
+
 void freeMinHeap(MinHeap* minHeap) {
     // Libere a memória alocada para o array de elementos da heap
     free(minHeap->arr);
