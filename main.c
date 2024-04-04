@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
     }
 
     // allocating memory for the k paths size
-    int64_t *S = (int64_t*)malloc(kCaminhos * sizeof(int64_t));
+    int64_t *S = (int64_t*)malloc((kCaminhos+1) * sizeof(int64_t));
 
     // calculating the shortest path
     Shortest_paths(1, numVertices, numArestas, kCaminhos, graph, S);
