@@ -1,6 +1,6 @@
-# Documentação: Problema de Caminhos Mágicos de Mysthollow para Luminae
+# K menores caminhos entre Mysthollow e Luminae
 
-## Introdução
+## 1. Introdução
 
 O problema dos Caminhos de Mysthollow para Luminae consiste em encontrar os k menores custos entre duas cidades específicas. Aqui, k representa a quantidade de menores custos que o usuário deseja encontrar, variando de 1 a 10. É importante ressaltar que os custos dos menores caminhos encontrados podem incluir caminhos que possuem ciclos.
 
@@ -8,14 +8,14 @@ O problema dos Caminhos de Mysthollow para Luminae consiste em encontrar os k me
 
 Desenvolvemos soluções para encontrar os k custos dos menores caminhos com ciclos, assim como para encontrar os k custos e/ou os k menores caminhos simples. Nesta documentação, focaremos em explicar a solução para encontrar os k menores custos de caminhos com ciclo. No entanto, também abordaremos um algoritmo para encontrar os caminhos simples mais curtos, garantindo uma compreensão completa das diferentes abordagens para o problema.
 
-### Modelagem do Problema Utilizando Grafos
+### 1.1 Modelagem do Problema Utilizando Grafos
 
 O problema dos Caminhos de Mysthollow para Luminae pode ser modelado de forma eficaz utilizando conceitos de grafos. Nesta modelagem, as cidades são representadas como nós e os caminhos entre elas como arestas direcionadas. É importante destacar que, no nosso caso, o grafo não deve possuir arestas negativas.
 
 A utilização de grafos oferece diversas vantagens para resolver este problema. Primeiramente, permite uma representação visual intuitiva das conexões entre as cidades e dos caminhos disponíveis. Além disso, a estrutura de grafos facilita a aplicação de algoritmos eficientes para encontrar os k menores custos entre Mysthollow e Luminae. Um exemplo desses algoritmos é o clássico algoritmo de Dijkstra, que será adaptado para lidar com grafos direcionados e encontrar soluções para o problema.
 
 Portanto, a modelagem do problema utilizando grafos oferece uma abordagem poderosa e flexível, permitindo explorar diversas estratégias e encontrar soluções eficientes para os Caminhos de Mysthollow para Luminae.
-### Restrições
+### 1.2 Restrições
 
 As restrições impostas no problema dos Caminhos de Mysthollow para Luminae têm como objetivo garantir que o programa seja executado de forma eficiente e segura. Algumas dessas restrições têm justificativas específicas:
 
@@ -24,15 +24,15 @@ As restrições impostas no problema dos Caminhos de Mysthollow para Luminae tê
 - Os vértices de partida e destino de cada voo, representados por "a" e "b" respectivamente, devem estar no intervalo de 1 a "n".
 - O custo de cada voo, representado por "c", deve estar no intervalo de 1 a 10^9.
 - O parâmetro k, que determina a quantidade de menores caminhos a serem encontrados, deve estar no intervalo de 1 a 10.
-### Entrada de Dados
+### 1.3 Entrada de Dados
 
 A entrada consiste em três inteiros: o número de cidades (vértices "n"), o número de voos (arestas "m") e o parâmetro k (quantidade de menores caminhos a serem encontrados). Esses dados são fornecidos em um arquivo de texto, que é passado como parâmetro ao executar o programa, por exemplo: `./prog -i input.txt -o output.txt`. Em seguida, o arquivo de entrada contém "m" linhas descrevendo os voos (arestas), cada linha contendo três inteiros: o vértice de partida (a), o vértice de destino (b) e o custo do vértice (c).
 
-### Saída de Dados
+### 1.4 Saída de Dados
 
 A saída consiste em k inteiros representando os preços dos k caminhos mais baratos, ordenados de acordo com seus preços. Esses resultados são escritos em um arquivo de texto, que também é especificado como parâmetro ao executar o programa.
 
-### Compilação do Programa
+### 1.5 Compilação do Programa
 
 Antes de executar o programa, é necessário compilar o código-fonte. Certifique-se de estar dentro do diretório do repositório e utilize o comando `make`. Isso irá compilar o código e gerar um arquivo executável chamado `prog.exe`.
 
@@ -46,7 +46,7 @@ O programa utiliza as seguintes bibliotecas:
 
 Certifique-se de ter essas bibliotecas disponíveis em seu sistema ao compilar e executar o programa. Os testes foram realizados em sistemas Linux, e todas as bibliotecas fazem parte do pacote build-essentials, presente em todas as distribuições baseadas em debian.
 
-### Utilização do Programa
+### 1.6 Utilização do Programa
 
 Após compilar o código-fonte, você pode executar o programa utilizando o arquivo executável gerado. Utilize os seguintes parâmetros pela linha de comando:
 
