@@ -2,7 +2,7 @@
 
 ## 1. Introdução
 
-O problema dos Caminhos de Mysthollow para Luminae consiste em encontrar os k menores custos entre duas cidades específicas. Aqui, k representa a quantidade de menores custos que o usuário deseja encontrar, variando de 1 a 10. É importante ressaltar que os custos dos menores caminhos encontrados podem incluir caminhos que possuem ciclos.
+O problema dos Caminhos de Mysthollow para Luminae consiste em encontrar os k menores custos entre duas cidades específicas. Aqui, k representa a quantidade de menores custos que o usuário deseja encontrar, variando de 1 a 10. É importante ressaltar que os custos dos menores caminhos encontrados podem incluir caminhos que possuem ciclos ou não, a depender da finalidade do uso do usuário.
 
 Desenvolvemos soluções para encontrar os k custos dos menores caminhos com ciclos, assim como para encontrar os k custos e/ou os k menores caminhos simples. Nesta documentação, focaremos em explicar a solução para encontrar os k menores custos de caminhos com ciclo. No entanto, também abordaremos um algoritmo para encontrar os caminhos simples mais curtos, garantindo uma compreensão completa das diferentes abordagens para o problema.
 
@@ -17,13 +17,14 @@ A utilização de grafos oferece diversas vantagens para resolver este problema.
 Portanto, a modelagem do problema utilizando grafos oferece uma abordagem poderosa e flexível, permitindo explorar diversas estratégias e encontrar soluções eficientes para os Caminhos de Mysthollow para Luminae.
 ### 1.2 Restrições
 
-As restrições impostas no problema dos Caminhos de Mysthollow para Luminae têm como objetivo garantir que o programa seja executado de forma eficiente e segura. Algumas dessas restrições têm justificativas específicas:
+As restrições impostas no problema dos Caminhos de Mysthollow para Luminae têm como objetivo garantir que o programa seja executado de forma eficiente e segura. Algumas dessas restrições têm justificativas específicas, como quantidades de bits reservados para tipos primitivos na linguagem C:
 
 - O número de cidades (vértices), representado por "n", deve estar no intervalo entre 2 e 10^5.
 - O número de voos (arestas), representado por "m", deve estar no intervalo entre 1 e 2 × 10^5.
 - Os vértices de partida e destino de cada voo, representados por "a" e "b" respectivamente, devem estar no intervalo de 1 a "n".
 - O custo de cada voo, representado por "c", deve estar no intervalo de 1 a 10^9.
 - O parâmetro k, que determina a quantidade de menores caminhos a serem encontrados, deve estar no intervalo de 1 a 10.
+
 ### 1.3 Entrada de Dados
 
 A entrada consiste em três inteiros: o número de cidades (vértices "n"), o número de voos (arestas "m") e o parâmetro k (quantidade de menores caminhos a serem encontrados). Esses dados são fornecidos em um arquivo de texto, que é passado como parâmetro ao executar o programa, por exemplo: `./prog -i input.txt -o output.txt`. Em seguida, o arquivo de entrada contém "m" linhas descrevendo os voos (arestas), cada linha contendo três inteiros: o vértice de partida (a), o vértice de destino (b) e o custo do vértice (c).
