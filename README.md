@@ -76,7 +76,9 @@ O Algoritmo de Eppstein (publicado em 1997) é uma abordagem eficiente para enco
 - **Sem Arestas Negativas**: Em grafos com ponderação negativa das arestas, o algoritmo de Dijkstra não pode ser aplicado para calcular as distâncias mínimas entre os vértices.
 - **Caminhos com Ciclos**: É capaz de encontrar os caminhos mais curtos entre dois vértices, mesmo quando esses caminhos incluem ciclos. Isso significa que os k menores custos podem incluir caminhos idênticos mas que percorrem um ciclo pertencente ao caminho um numero diferente de vezes.
 - **Complexidade**: Eppstein otimiza o algoritmo **- EXCLUINDO o primeiro Dijkstra -** para um tempo de execução teórico de O(n + m + k), o nosso código com algumas alterações que vamos mencionar, apresenta desempenho muito semelhante.
-**Referências**:
+
+- **Referências**:
+
 - [Publicação Original de David Eppstein em 1997](https://ics.uci.edu/~eppstein/pubs/Epp-SJC-98.pdf)
 - [Implementação Referenciada](https://codeforces.com/blog/entry/102085) - Implementação de uma versão simplificada e otimizada para encontrar os k menores caminhos.
 
