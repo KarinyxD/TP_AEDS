@@ -13,19 +13,7 @@ MinHeap* createMinHeap(int capacity) {
     minHeap->arr = (Priority_list*)malloc(capacity * sizeof(Priority_list));
     return minHeap;
 }
-Priority_list getMinCostElement(MinHeap* minHeap) {
-    Priority_list minElement;
-    minElement.cost = LONG_MAX; // Inicializa o custo mínimo como o máximo possível
 
-    // Percorre o array da heap para encontrar o elemento com o menor custo
-    for (int i = 0; i < minHeap->size; i++) {
-        if (minHeap->arr[i].cost < minElement.cost) {
-            minElement = minHeap->arr[i];
-        }
-    }
-    
-    return minElement;
-}
 void swap(Priority_list* a, Priority_list* b) {
     Priority_list temp = *a;
     *a = *b;
