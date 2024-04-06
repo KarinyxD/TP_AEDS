@@ -85,7 +85,7 @@ O Algoritmo de Eppstein (publicado em 1997) é uma abordagem eficiente para enco
 #### 2.2.2 Algoritmo de Yen
 O algoritmo de Yen foi implementado em 1971, antes de Eppstein (1997), e é uma solução simples, relativamente fácil de ser compreendida. Ele consiste em encontrar o menor caminho utilizando Dijkstra e remover nós que fazem parte do menor caminho que possuam nós adjacentes.
 
-![Yen's K-Shortest Path Algorithm](https://en.wikipedia.org//wiki/Yen's_algorithm#/media/File:Yen's_K-Shortest_Path_Algorithm,_K=3,_A_to_F.gif)
+![Yen's_K-Shortest_Path_Algorithm,_K=3,_A_to_F](https://github.com/KarinyxD/TP_AEDS/assets/121648163/6d71ed3e-3489-42af-8e45-7e947c08a714)
 
 Também possui algumas particularidades que, dependendo do contexto, podem inviabilizar ou tornar o algoritmo de Yen uma boa escolha:
 - **Caminhos simples**: Encontra caminhos simples, ou seja, assim como uma ferramenta GPS, mostra caminhos alternativos, e é um bom algoritmo para não só encontrar os custos, mas também os caminhos mais curtos.
