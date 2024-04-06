@@ -9,7 +9,7 @@
 binary_heap *create_binary_heap(int capacity){
     binary_heap *heap = (binary_heap *)malloc(sizeof(binary_heap));
     heap->capacity = capacity;
-    heap->size = 0;
+    heap->size = 1;
     heap->array = (Priority_list *)malloc(sizeof(Priority_list) * capacity);
     return heap;
 }
