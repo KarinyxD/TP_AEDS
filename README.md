@@ -94,7 +94,7 @@ Também possui algumas particularidades que, dependendo do contexto, podem invia
 ### 2.3 Explicando a solução baseada em Eppstein implementada
 #### 2.3.1 Modifcações em Dijkstra e Pseucodigo
 - O algoritmo de Dijkstra geralmente é implementado com listas de adjacência e uma heap binária em O(m log m). Esta versão modificada visita cada vértice no máximo k vezes, portanto, sua complexidade é O(km log km).
-- Como nosso k, não apresenta valores muito altos, essa abordagem é eficiente para resolver diversos problemas de competições de programação.
+- Quando o k não apresenta valores muito altos, essa abordagem é suficiente para resolver diversos problemas de competições de programação.
 ```pseudocodigo
 q = heap mínima vazia
 count = array preenchido com 0
