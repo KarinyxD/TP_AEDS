@@ -4,6 +4,7 @@
 #include <limits.h>
 #include "shortestPaths.h"
 #include "graph.h"
+#include "binary-heap.h"
 
 // Função para criar uma nova heap
 MinHeap* createMinHeap(int capacity) {
