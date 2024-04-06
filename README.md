@@ -43,7 +43,7 @@ O programa utiliza as seguintes bibliotecas:
 - **stdio.h**: Biblioteca padrão em C para operações de entrada/saída.
 - **stdlib.h**: Biblioteca padrão em C para funções gerais, incluindo gerenciamento de memória dinâmica.
 - **sys/time.h**: Biblioteca em C para operações de tempo.
-- **sys/resource.h**: Biblioteca em C para gerenciamento de uso de recursos.
+- **sys/resource.h**: Biblioteca em C para gerenciamento de uso de recursos, disponivel para sistemas linux
 - **limits.h**: Define várias propriedades sobre os vários tipos de variáveis, usado aqui para definir o valor máximo do tipo inteiro.
 
 Certifique-se de ter essas bibliotecas disponíveis em seu sistema ao compilar e executar o programa. Os testes foram realizados em sistemas Linux, e todas as bibliotecas fazem parte do pacote build-essentials, presente em todas as distribuições baseadas em debian.
@@ -64,70 +64,46 @@ Certifique-se de passar os parâmetros corretamente ao executar o programa, por 
 Para entender as soluções propostas para o problema dos Caminhos de Mysthollow para Luminae, é necessário ter conhecimento prévio sobre os seguintes algoritmos:
 
 - **Algoritmo de Dijkstra**: Utilizado para encontrar o caminho mais curto entre dois vértices em um grafo ponderado com arestas não negativas. Este algoritmo será adaptado e combinado com outras técnicas para encontrar os k menores custos entre Mysthollow e Luminae.
-- **Heap binária persistente**: Uma variação da estrutura de dados de heap binária, onde as operações de inserção e remoção são realizadas em novas cópias da estrutura original, preservando assim a versão anterior da estrutura. Essa técnica é utilizada para encontrar os k menores custos em tempo eficiente.
+- **Heap binária**: Uma variação da estrutura de dados de heap
 
 Esses conhecimentos prévios são essenciais para compreender as soluções propostas e como elas são implementadas para resolver o problema em questão.
--------------------------------------
 
-Para resolver este problema, foram implementados dois algoritmos:
+### 2.2 Referências
+Existem duas soluções:
+#### 2.2.1 Algoritmo de Eppstein
+O Algoritmo de Eppstein (publicado em 1997) é uma abordagem eficiente para encontrar os k menores custos entre dois vértices em um grafo ponderado. Este algoritmo utiliza uma heap binária modificada como estrutura de dados principal. No entanto, apresenta algumas particularidades que a depender do contexto podem ser negativas:
+- **Recuperação do Caminho**: Embora o algoritmo de Eppstein calcule eficientemente os k menores custos entre dois vértices em um grafo ponderado, ele apenas calcula os comprimentos dos caminhos, não os próprios caminhos. É possivel modifica-lo, mas seria necessário acompanhar as arestas laterais seguidas durante o processo, o que pode adicionar complexidade à implementação.
+- **Sem Arestas Negativas**: Em grafos com ponderação negativa das arestas, o algoritmo de Dijkstra não pode ser aplicado para calcular as distâncias mínimas entre os vértices.
+- **Caminhos com Ciclos**: É capaz de encontrar os caminhos mais curtos entre dois vértices, mesmo quando esses caminhos incluem ciclos. Isso significa que os k menores custos podem incluir caminhos idênticos mas que percorrem um ciclo pertencente ao caminho um numero diferente de vezes.
+- **Complexidade**: Eppstein otimiza o algoritmo **- EXCLUINDO o primeiro Dijkstra -** para um tempo de execução teórico de O(n + m + k), o nosso código com algumas alterações que vamos mencionar, apresenta desempenho muito semelhante.
+**Referências**:
+- [Publicação Original de David Eppstein em 1997](https://ics.uci.edu/~eppstein/pubs/Epp-SJC-98.pdf)
+- [Implementação Referenciada](https://codeforces.com/blog/entry/102085) - Implementação de uma versão simplificada e otimizada para encontrar os k menores caminhos.
 
-1. **Algoritmo para encontrar a distância dos k caminhos mais curtos, permitindo ciclos:** Este algoritmo calcula apenas a distância dos k caminhos mais curtos entre Mysthollow e Luminae, permitindo que os caminhos possam revisitar as mesmas cidades múltiplas vezes.
-    
-2. **Algoritmo para encontrar os k caminhos mais curtos sem ciclos:** Este algoritmo não só calcula a distância dos k caminhos mais curtos, mas também os próprios caminhos, garantindo que não haja revisitação de cidades.
-    
+#### 2.2.2 Algoritmo de Yen
+O algoritmo de Yen foi implementado em 1971, antes de Eppstein (1997), e é uma solução simples, relativamente fácil de ser compreendida. Ele consiste em encontrar o menor caminho utilizando Dijkstra e remover nós que fazem parte do menor caminho que possuam nós adjacentes.
 
-Ambos os algoritmos foram implementados em módulos separados para garantir modularidade e facilitar a manutenção do código. Além disso, foi definido um arquivo de protótipos e definições contendo as estruturas de dados e protótipos das funções dos vários módulos. A compilação do programa utiliza o utilitário Make para facilitar o processo.
+![Yen's K-Shortest Path Algorithm](https://en.wikipedia.org//wiki/Yen's_algorithm#/media/File:Yen's_K-Shortest_Path_Algorithm,_K=3,_A_to_F.gif)
 
-### 
-## Avaliação de Desempenho
+Também possui algumas particularidades que, dependendo do contexto, podem inviabilizar ou tornar o algoritmo de Yen uma boa escolha:
+- **Caminhos simples**: Encontra caminhos simples, ou seja, assim como uma ferramenta GPS, mostra caminhos alternativos, e é um bom algoritmo para não só encontrar os custos, mas também os caminhos mais curtos.
+- **Complexidade**: A complexidade é maior do que a do algoritmo de Eppstein devido ao maior número de chamadas ao algoritmo de Dijkstra. A complexidade de tempo de Yen's é O(KN(M + N log N)), onde N é o número de vértices e M é o número de arestas no grafo e K a quantidade de caminhos minimos. Para alcançar essa complexidade de tempo, é necessário utilizar uma Fibonacci heap no algoritmo de Dijkstra para melhorar seu pior caso, que possui complexidade quadrática, O(n^2).
 
-O programa implementado foi avaliado para várias entradas utilizando as funções getrusage e gettimeofday para medir os tempos de execução. Foram distinguindos os tempos de computação dos tempos de entrada e saída. Foram também analisados os tempos de usuário e os tempos de sistema e sua relação com os tempos de relógio para entender o desempenho do programa em diferentes cenários.
-
-## Conclusão
-
-Embarque nesta jornada mágica em busca dos k caminhos mais curtos de Mysthollow para Luminae. Com os algoritmos implementados, você estará pronto para desvendar os segredos dos caminhos místicos e completar sua busca. Que a orientação dos antigos ilumine seu caminho nesta aventura!
-
-Esta documentação fornece uma visão geral do problema, da solução proposta e da utilização do programa, garantindo que os usuários possam compreender e utilizar efetivamente a solução implementada.
-
-
-
-#Do que se trata?
-
-#Sobre decisões em relação a estrutura de dados
-Inicialmente estaremos implementando grafos utilizando uma lista de adjacencia. O motivo é a facilidade na implementação, que nos permite ter mais tempo para focar em uma boa estruturação do codigo, boa modularização, e solução do problema proposto. Posteriormente, podemos realizar a modificação da estrutura de dados e das funções de grafos para otimizar o codigo, se assim julgarmos necessário.
-
-#Funções Implementadas
-Graph* CreateEmptyGraph();
-void InsertEdge (int v1, int v2, int weight, Graph* graph);
-int DoesEdgeExist(int v1, int v2, Graph* graph);
-int* GetAdjacentVertices(int v, Graph* graph);
-void RemoveEdge(int v1, int v2, int weight, Graph* graph);
-void FreeGraph(Graph* graph);
-void PrintGraph(Graph* graph);
-Graph* TransposeGraph(Graph* graph);
-Edge RemoveMinEdge(Graph* graph);
-Graph* Dijkstra(int v1, Graph* graph);
-
-#Funções auxiliares
-void AddVertex(int vertex, Graph* graph);
-void Relaxation(int numVertices, int **vpc, int v1, Graph* graph, int *S);
-
-#Feitos Kariny
-- modifiquei a funçao GetAdjacentVertices para poder retornar uma struct do tipo Edge;
-- fiz a funçao auxiliar Relaxation, usada no Djkistra;
-- fiz o Djkistra;
-
-
-#To do
-- Testar outros casos.
-- Armazenar os valores dos k's no output.txt.
-- Fazer documentação.
-- Fazer a analise de complexidade do algoritmo.
-- Melhorias no código, se necessário(e se tiver tempo).
-
-###OBS1 do programa: para que funcione corretamente, é necessário que se crie os vértices do grafo sem pular numeros.
-###OBS2 do programa: provavelmente nao esta encontrando os menores caminhos que possuem ciclos.(passando na mesma aresta mais de uma vez).
-
-###OBS2 funçao djkistra: os pesos dos grafos dos menores caminhos, são os pesos dos vertices anteriores somados. 
-Ou seja, o custo minimo para chegar em cada vertice.
-O peso do ultimo vértice, corresponde ao custo total do caminho.
+### 2.3 Explicando a solução baseada em Eppstein implementada
+#### 2.3.1 Modifcações em Dijkstra e Pseucodigo
+- O algoritmo de Dijkstra geralmente é implementado com listas de adjacência e uma heap binária em O(m log m). Esta versão modificada visita cada vértice no máximo k vezes, portanto, sua complexidade é O(km log km).
+- Como nosso k, não apresenta valores muito altos, essa abordagem é eficiente para resolver diversos problemas de competições de programação.
+```pseudocodigo
+q = heap mínima vazia
+count = array preenchido com 0
+empilhe (0, s) em q
+enquanto count[t] < k:
+(l, u) = desempilhe q
+se count[u] == k:
+continue
+count[u] += 1
+se u == t:
+encontrou um caminho de comprimento l
+para cada aresta de saída (u, v, w) de u:
+empilhe (l + w, v) em q
+```
