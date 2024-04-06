@@ -208,54 +208,53 @@ int GetEdgeWeight(int v1, int v2, Graph* graph){
     }
     return -1;
 }
-int EqualGraphs(Graph* graph1, Graph* graph2){
-    if (graph1->numVertices != graph2->numVertices){
-        return 0;
+//Get k shortest paths
+void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, long long int* S){
+    int count[graph->numVertices];
+    binary_heap* list = create_binary_heap(numArestas);
+    for (int i = 0; i < graph->numVertices; i++){
+        count[i] = 0;
     }
-    // copy the two graphs
-    Graph* graph1Copy = CreateEmptyGraph();
-    Graph* graph2Copy = CreateEmptyGraph();
+    
+    list->array[0].v = vi;
+    list->array[0].cost = 0;
+    Priority_list current = list->array[0];
+    int k = 0;
+    //em quanto o contador de caminhos para o ultimo vertice for menor q kCaminhos, faça:
+    while(count[graph->numVertices-1] < kCaminhos && list->size > 0){ 
+        //procurar e remover o menor peso em list e armazenar em current
+        current = extract_min(list);
 
-    for (int i = 0; i < graph1->numVertices; i++){
-        AddVertex(graph1->vertexList[i].value, graph1Copy);
+        if(count[(current.v - 1)] == kCaminhos){ //se ja achou kCaminhos pra o vertice atual
+            continue; //prox interaçao
+        }
+
+        count[current.v - 1]++;
+        if (current.v == vf){ //se o vertice atual for o final, salva o custo do caminho
+            S[k] = current.cost;
+            k++;
+        }
+        //chamar relaxation pra salvar os custos dos vertices adjacentes ao current na lista 
+        Relaxation(current, list, graph);
     }
-    for (int i = 0; i < graph2->numVertices; i++){
-        AddVertex(graph2->vertexList[i].value, graph2Copy);
+    S[k] = -1; //sinaliza o final da lista de kCaminhos
+    free(list->array);
+    free(list);
+}
+
+//Get nearest unvisited vertex
+void Relaxation(Priority_list v_current, binary_heap* list, Graph* graph){
+
+    Edge *AdjVertices = GetAdjacentVertices(v_current.v, graph); // retorna uma lista com os vertices adjacentes a v 
+    int i = 0;
+    Priority_list AddinList;
+    while(AdjVertices[i].v2 != -1){ //em quanto a lista de adj nao chegar ao fim
+        long long int sum = AdjVertices[i].weight + v_current.cost;
+        AddinList.v = AdjVertices[i].v2;
+        AddinList.cost = sum;
+        insert(list, AddinList);
+        i++;
     }
 
-    // now copy the edges for each vertex
-    for (int i = 0; i < graph1->numVertices; i++){
-        Vertex* current = graph1->vertexList[i].next;
-        while(current != NULL){
-            InsertEdge(graph1->vertexList[i].value, current->value, current->weight, graph1Copy);
-            current = current->next;
-        }
-    }
-
-    for (int i = 0; i < graph2->numVertices; i++){
-        Vertex* current = graph2->vertexList[i].next;
-        while(current != NULL){
-            InsertEdge(graph2->vertexList[i].value, current->value, current->weight, graph2Copy);
-            current = current->next;
-        }
-    }
-
-    // check if the two graphs are equal
-    // removing the minimum edge from each graph until there are no more edges
-    // if Edge.weight is INT_MAX, there are no more edges to be removed
-    while (1){
-        Edge edge1 = RemoveMinEdge(graph1Copy);
-        Edge edge2 = RemoveMinEdge(graph2Copy);
-        if (edge1.weight != edge2.weight || edge1.v1 != edge2.v1 || edge1.v2 != edge2.v2){
-            FreeGraph(graph1Copy);
-            FreeGraph(graph2Copy);
-            return 0;
-        }
-        if (edge1.weight == LONG_MAX && edge2.weight == LONG_MAX){
-            free(graph1Copy);
-            free(graph2Copy);
-            return 1;
-            break;
-        }
-    }
+    free(AdjVertices);
 }

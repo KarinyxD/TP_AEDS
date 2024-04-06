@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "entry.h"
 
 Arguments parse_arguments(int argc, char *argv[]){
@@ -18,9 +19,16 @@ Arguments parse_arguments(int argc, char *argv[]){
 }
 
 FILE* open_file(char *filename, char *mode){
-    FILE *file = fopen(filename, mode);
+    char folder[] = "./inputs-and-ouputs/";
+    char fullPath[255];
+
+    // Concatenate the folder name and the filename
+    strcpy(fullPath, folder);
+    strcat(fullPath, filename);
+
+    FILE *file = fopen(fullPath, mode);
     if (file == NULL){
-        printf("Error opening file %s\n", filename);
+        printf("Error opening file %s\n", fullPath);
         exit(EXIT_FAILURE);
     }
     return file;
