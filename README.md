@@ -15,6 +15,7 @@ O problema dos Caminhos de Mysthollow para Luminae pode ser modelado de forma ef
 A utilização de grafos oferece diversas vantagens para resolver este problema. Primeiramente, permite uma representação visual intuitiva das conexões entre as cidades e dos caminhos disponíveis. Além disso, a estrutura de grafos facilita a aplicação de algoritmos eficientes para encontrar os k menores custos entre Mysthollow e Luminae. Um exemplo desses algoritmos é o clássico algoritmo de Dijkstra, que será adaptado para lidar com grafos direcionados e encontrar soluções para o problema.
 
 Portanto, a modelagem do problema utilizando grafos oferece uma abordagem poderosa e flexível, permitindo explorar diversas estratégias e encontrar soluções eficientes para os Caminhos de Mysthollow para Luminae.
+
 ### 1.2 Restrições
 
 As restrições impostas no problema dos Caminhos de Mysthollow para Luminae têm como objetivo garantir que o programa seja executado de forma eficiente e segura. Algumas dessas restrições têm justificativas específicas, como quantidades de bits reservados para tipos primitivos na linguagem C:
@@ -55,7 +56,18 @@ Após compilar o código-fonte, você pode executar o programa utilizando o arqu
 - **-o arquivo de saída**: Especifica o arquivo de saída onde serão escritos os preços dos k caminhos mais baratos.
 
 Certifique-se de passar os parâmetros corretamente ao executar o programa, por exemplo: `./prog.exe -i input.txt -o output.txt`. Isso garantirá que o programa seja executado corretamente e que os resultados sejam salvos no arquivo de saída especificado.
-## Soluções Propostas
+
+## 2. Soluções Propostas
+
+### 2.1 Conhecimento Prévio
+
+Para entender as soluções propostas para o problema dos Caminhos de Mysthollow para Luminae, é necessário ter conhecimento prévio sobre os seguintes algoritmos:
+
+- **Algoritmo de Dijkstra**: Utilizado para encontrar o caminho mais curto entre dois vértices em um grafo ponderado com arestas não negativas. Este algoritmo será adaptado e combinado com outras técnicas para encontrar os k menores custos entre Mysthollow e Luminae.
+- **Heap binária persistente**: Uma variação da estrutura de dados de heap binária, onde as operações de inserção e remoção são realizadas em novas cópias da estrutura original, preservando assim a versão anterior da estrutura. Essa técnica é utilizada para encontrar os k menores custos em tempo eficiente.
+
+Esses conhecimentos prévios são essenciais para compreender as soluções propostas e como elas são implementadas para resolver o problema em questão.
+-------------------------------------
 
 Para resolver este problema, foram implementados dois algoritmos:
 
