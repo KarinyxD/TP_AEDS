@@ -6,17 +6,30 @@
 
 Arguments parse_arguments(int argc, char *argv[]){
     Arguments args;
+    int opt;
 
-    if (argc != 3) {
+    while ((opt = getopt(argc, argv, "i:o:")) != -1) {
+        switch (opt) {
+        case 'i':
+            args.inputFile = optarg;
+            break;
+        case 'o':
+            args.outputFile = optarg;
+            break;
+        default:
+            printf("Usage: %s -i inputfile -o outputfile\n", argv[0]);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    if (args.inputFile == NULL || args.outputFile == NULL) {
         printf("Both input and output files must be provided\n");
         exit(EXIT_FAILURE);
     }
 
-    args.inputFile = argv[1];
-    args.outputFile = argv[2];
-
     return args;
 }
+
 
 FILE* open_file(char *filename, char *mode){
     char folder[] = "./inputs-and-ouputs/";
