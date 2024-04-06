@@ -69,7 +69,7 @@ Para entender as soluções propostas para o problema dos Caminhos de Mysthollow
 Esses conhecimentos prévios são essenciais para compreender as soluções propostas e como elas são implementadas para resolver o problema em questão.
 
 ### 2.2 Referências
-Existem duas soluções:
+Existem duas soluções bem populares para encontrar os k menores caminhos:
 #### 2.2.1 Algoritmo de Eppstein
 O Algoritmo de Eppstein (publicado em 1997) é uma abordagem eficiente para encontrar os k menores custos entre dois vértices em um grafo ponderado. Este algoritmo utiliza uma heap binária modificada como estrutura de dados principal. No entanto, apresenta algumas particularidades que a depender do contexto podem ser negativas:
 - **Recuperação do Caminho**: Embora o algoritmo de Eppstein calcule eficientemente os k menores custos entre dois vértices em um grafo ponderado, ele apenas calcula os comprimentos dos caminhos, não os próprios caminhos. É possivel modifica-lo, mas seria necessário acompanhar as arestas laterais seguidas durante o processo, o que pode adicionar complexidade à implementação.
