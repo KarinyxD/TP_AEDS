@@ -137,7 +137,7 @@ Com essa modificação e mais algumas outras, é possivel manter a complexidade 
 ##### 2.3.2.3 Com todas as melhorias mencionadas acima
 - Chegamos até O(m+nlogn) de complexidade. Que é basicamente a complexidade mencionada na publicação de Eppstein. OBS: A complexidade O(n + m + k) mencionada no tópico 2.2.1 é **excluindo** o primeiro dijkstra.
 - Caso queira uma explicação mais detalhada sobre essas melhorias recomendamos acessar [Implementação Referenciada](https://codeforces.com/blog/entry/102085)
-#### 2.3.2.4 Sobre a implementação que está atualmente no nosso repositório
+##### 2.3.2.4 Sobre a implementação que está atualmente no nosso repositório
 A versão que está implementada no nosso repositório é a primeira, que possui pseudocodigo explicativo. Listamos possiveis melhorias caso seja de interesse do usuário, para nós, como nosso k vai variar de 1 até 10, a solução mais simples é suficiente.
 
 ### 2.3 Explicando a solução baseada no algoritmo de Yen implementada
