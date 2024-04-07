@@ -4,7 +4,7 @@
 
 O problema dos Caminhos de Mysthollow para Luminae consiste em encontrar os k menores custos entre duas cidades específicas. Aqui, k representa a quantidade de menores custos que o usuário deseja encontrar, variando de 1 a 10. É importante ressaltar que os custos dos menores caminhos encontrados podem incluir caminhos que possuem ciclos ou não, a depender da finalidade do uso do usuário.
 
-Desenvolvemos soluções para encontrar os k custos dos menores caminhos com ciclos, assim como para encontrar os k custos e/ou os k menores caminhos simples. Nesta documentação, focaremos em explicar a solução para encontrar os k menores custos de caminhos com ciclo. No entanto, também abordaremos um algoritmo para encontrar os caminhos simples mais curtos, garantindo uma compreensão completa das diferentes abordagens para o problema.
+Existem soluções para encontrar os k custos dos menores caminhos com ciclos, assim como para encontrar os k custos e/ou os k menores caminhos simples. Nesta documentação, focaremos em explicar a solução para encontrar os k menores custos de caminhos com ciclo. No entanto, também abordaremos um algoritmo para encontrar os caminhos simples mais curtos, garantindo uma compreensão completa das diferentes abordagens para o problema.
 
 ![caminhos-simples-ciclos](https://github.com/KarinyxD/TP_AEDS/assets/121648163/3ee82b7b-46f3-49ba-8183-c5c0d357abdc)
 
@@ -28,11 +28,15 @@ As restrições impostas no problema dos Caminhos de Mysthollow para Luminae tê
 
 ### 1.3 Entrada de Dados
 
-A entrada consiste em três inteiros: o número de cidades (vértices "n"), o número de voos (arestas "m") e o parâmetro k (quantidade de menores caminhos a serem encontrados). Esses dados são fornecidos em um arquivo de texto, que é passado como parâmetro ao executar o programa, por exemplo: `./prog -i input.txt -o output.txt`. Em seguida, o arquivo de entrada contém "m" linhas descrevendo os voos (arestas), cada linha contendo três inteiros: o vértice de partida (a), o vértice de destino (b) e o custo do vértice (c).
+Para fornecer os dados de entrada ao programa, você deve criar um arquivo de texto chamado input.txt e colocá-lo na pasta "inputs-and-outputs". Este arquivo deve conter três inteiros: o número de cidades (vértices "n"), o número de voos (arestas "m") e o parâmetro k (quantidade de menores caminhos a serem encontrados). Por padrão, o programa espera encontrar esses dados na pasta "inputs-and-outputs".
+
+Para executar o programa, utilize o comando ./prog -i input.txt -o output.txt, onde input.txt é o arquivo de entrada contendo as informações sobre as cidades e os voos, e output.txt é o arquivo de saída onde os resultados serão escritos. Certifique-se de que os arquivos de entrada e saída também estão na pasta "inputs-and-outputs".
 
 ### 1.4 Saída de Dados
 
-A saída consiste em k inteiros representando os preços dos k caminhos mais baratos, ordenados de acordo com seus preços. Esses resultados são escritos em um arquivo de texto, que também é especificado como parâmetro ao executar o programa.
+Os resultados da execução do programa são salvos em um arquivo de texto chamado output.txt, localizado na pasta "inputs-and-outputs". Este arquivo contém k inteiros representando os preços dos k caminhos mais baratos, ordenados de acordo com seus preços. Ao executar o programa com o comando ./prog -i input.txt -o output.txt, os resultados serão automaticamente escritos neste arquivo de saída.
+
+É importante observar que se o arquivo output.txt já existir, ele será sobrescrito com os novos resultados. Apagando o resultado obtido anteriormente.
 
 ### 1.5 Compilação do Programa
 
@@ -75,7 +79,7 @@ O Algoritmo de Eppstein (publicado em 1997) é uma abordagem eficiente para enco
 - **Recuperação do Caminho**: Embora o algoritmo de Eppstein calcule eficientemente os k menores custos entre dois vértices em um grafo ponderado, ele apenas calcula os comprimentos dos caminhos, não os próprios caminhos. É possivel modifica-lo, mas seria necessário acompanhar as arestas laterais seguidas durante o processo, o que pode adicionar complexidade à implementação.
 - **Sem Arestas Negativas**: Em grafos com ponderação negativa das arestas, o algoritmo de Dijkstra não pode ser aplicado para calcular as distâncias mínimas entre os vértices.
 - **Caminhos com Ciclos**: É capaz de encontrar os caminhos mais curtos entre dois vértices, mesmo quando esses caminhos incluem ciclos. Isso significa que os k menores custos podem incluir caminhos idênticos mas que percorrem um ciclo pertencente ao caminho um numero diferente de vezes.
-- **Complexidade**: Eppstein otimiza o algoritmo **- EXCLUINDO o primeiro Dijkstra -** para um tempo de execução teórico de O(n + m + k), o nosso código com algumas alterações que vamos mencionar, apresenta desempenho muito semelhante.
+- **Complexidade**: Eppstein otimiza o algoritmo - **EXCLUINDO** o primeiro Dijkstra - para um tempo de execução teórico de O(n + m + k), o nosso código com algumas alterações que vamos mencionar, apresenta desempenho muito semelhante.
 
 **Referências**:
 
@@ -109,7 +113,25 @@ encontrou um caminho de comprimento l
 para cada aresta de saída (u, v, w) de u:
 empilhe (l + w, v) em q
 ```
-### 3.
+#### 2.3.2 Complexidade do código
+Essa versão modificada do algoritmo de Djikstra visita cada vertice no máximo k vezes, por isso podemos dizer que possui complexidade O(km log km).
+
+#### 2.3.2 Melhorias que podem ser feitas
+##### 2.3.2.1 Removendo todos os vertices do conjunto G que não alcançam a cidade final: 
+Com essa modificação e mais algumas outras, é possivel manter a complexidade da solução anterior mas encontrando todos os k caminhos possiveis.
+- 1. Com a utilização do grafo transposto, podemos encontrar a distância de todos os vertices em uma só execução de dijkstra, de complexidade assintótica O(m log m).
+- 2. Na construção do grafo transposto é possivel ao utilizar uma lista de adjacência que faz com que a complexidade de inserção seja O(1), então a construção do grafo transposto leva O(m)
+- 3. Ao realizar a remoção (pop) do menor custo da nossa heap, podem existir O(m) nós (caminhos), então levamos O(km log km) para remover k valores da nossa heap
+- **Conclusão** A complexidade total é O(km log km). Isso nos permite encontrar todos os menores caminhos com a mesma complexidade de tempo do nosso código atual.
+##### 2.3.2.2 Com a solução anterior uma nova possibilidade surge
+- 1. O problema com G′ é que ele é ilimitado, podendo haver qualquer número de arestas saindo de um vértice. Se G′ fosse um grafo limitado com no máximo c arestas saindo de um vértice, k-pop levaria tempo O(kc log kc) reduzindo ainda mais a complexidade. Utilizando uma heap de grau maximo fixo reduzimos a complexidade do k-pop (retirada de menores caminhos da heap de menores caminhos).
+##### 2.3.2.3 Com todas as melhorias mencionadas acima
+- Chegamos até O(m+nlogn) de complexidade. Que é basicamente a complexidade mencionada na publicação de Eppstein. OBS: A complexidade O(n + m + k) mencionada no tópico 2.2.1 é **excluindo** o primeiro dijkstra.
+- Caso queira uma explicação mais detalhada sobre essas melhorias recomendamos acessar [Implementação Referenciada](https://codeforces.com/blog/entry/102085)
+#### 2.3.3 Sobre a implementação que está atualmente no nosso repositório
+A versão que está implementada no nosso repositório é a primeira, que possui pseudocodigo explicativo. Listamos possiveis melhorias caso seja de interesse do usuário, para nós. Como nosso k, vai variar de 1 até 10, a solução mais simples é suficiente.
+
+### 2.4 Explicando a solução baseada no algoritmo de Yen implementada
 
 ### 4. Contribuindo
 ### 5. Autores

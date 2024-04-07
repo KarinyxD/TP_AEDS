@@ -32,7 +32,7 @@ Arguments parse_arguments(int argc, char *argv[]){
 
 
 FILE* open_file(char *filename, char *mode){
-    char folder[] = "./inputs-and-ouputs/";
+    char folder[] = "./inputs-and-outputs/";
     char fullPath[255];
 
     // Concatenate the folder name and the filename
