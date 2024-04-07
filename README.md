@@ -155,6 +155,8 @@ A seguir, apresentamos uma visão geral dos 3 tipos abstratos de dados presentes
 2. Graph (grafo): Define as estruturas de dados necessárias para representar e manipular grafos. Ele inclui definições para vértices (Vertex) e arestas (Edge), bem como a estrutura principal Graph que mantém informações sobre o número de vértices e uma lista de adjacência. Este TAD oferece funções para adicionar e remover vértices e arestas, verificar a existência de uma aresta, obter vértices adjacentes e outras operações comuns em grafos.
 3. Arguments (argumentos): Responsável por armazenar e manipular os argumentos de entrada do programa. Ele define a estrutura Arguments, que contém informações como o nome do arquivo de entrada e o nome do arquivo de saída. Além disso, fornece funções para analisar os argumentos passados pela linha de comando, abrir arquivos e ler linhas de arquivos. Isso ajuda a garantir uma interação suave com o usuário e uma configuração correta do programa.
 
+Na explanação detalhada, omitiremos as entradas e saidas da função, para facilitar a leitura da documentação. Essas informações podem ser facilmente obtidas nos arquivos correspondentes do tipo ".h" presentes neste repositorio.
+
 #### 3.1.1 Detalhamento da Binary Heap
 A estrutura de dados da Binary Heap foi modificada para atender às necessidades específicas do nosso projeto. Em vez de ter um array de inteiros como é comum em implementações tradicionais, optamos por utilizar um array de structs Priority_list, que armazena o valor do vértice (v) e o custo associado a ele (cost).
 
@@ -250,11 +252,11 @@ typedef struct {
 - Abaixo, listamos as funções disponíveis para manipulação da Entry:
 
 1. **Verificação dos Argumentos**
-   - `parse_arguments(int argc, char *argv[])`: Verifica se os argumentos de entrada são corretos e retorna uma estrutura Arguments contendo os nomes dos arquivos de entrada e saída.
+   - `parse_arguments()`: Verifica se os argumentos de entrada são corretos e retorna uma estrutura Arguments contendo os nomes dos arquivos de entrada e saída.
 2. **Abertura de Arquivos**
-   - `open_file(char *filename, char *mode)`: Abre um arquivo de acordo com o modo especificado (leitura, escrita, etc.).
+   - `open_file()`: Abre um arquivo de acordo com o modo especificado (leitura, escrita, etc.).
 3. **Leitura de Linhas**
-   - `read_line(FILE* file, int *n_vertices, int *n_caminhos, int *k_caminhos)`: Lê uma linha de um arquivo e extrai informações relevantes, como o número de vértices, o número de caminhos e o valor de k.
+   - `read_line()`: Lê uma linha de um arquivo e extrai informações relevantes, como o número de vértices, o número de caminhos e o valor de k.
 
 ### 4. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
