@@ -124,8 +124,6 @@ enquanto (count[t] < k) && (q != 0):
 - s -> vértice inicial.
 - t -> vértice final.
 - p -> custo do caminho.
-#### 2.3.2 Complexidade do código
-Essa versão modificada do algoritmo de Djikstra visita cada vertice no máximo k vezes, por isso podemos dizer que possui complexidade O(km log km).
 
 #### 2.3.2 Melhorias que podem ser feitas
 ##### 2.3.2.1 Removendo todos os vertices do conjunto G que não alcançam a cidade final: 
