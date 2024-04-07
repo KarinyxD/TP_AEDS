@@ -259,15 +259,9 @@ typedef struct {
    - `read_line()`
 
 ### 4. Análise de Complexidade Assintótica do Algoritmo
-A complexidade desse algoritmo é predominantemente influenciada pela função Shortest_paths(), que é a essência do processo de busca. Por esse motivo, focaremos principalmente nesta função, dado seu papel central e sua maior complexidade.
-- Shortest_paths():
+- Este repositório está em constante evolução, estamos trabalhando para realizar a analise de complexidade, de não só uma, mas todas as funções implementadas.
 
-**Descrição:** Esta função é a peça central do algoritmo modificado de Dijkstra, responsável por encontrar os k menores caminhos. Dentro desta função, a Relaxation(), que possui uma complexidade assintótica de O(n + log m), é chamada para atualizar os custos dos vértices. O termo "n" vem da função GetAdjacentVertices, utilizada para obter os vértices adjacentes a um dado vértice. Enquanto isso, o termo "log m" é devido à inserção de um novo elemento na heap. Essa inserção ocorre sempre que um novo caminho à partir de um vértice é descoberto durante o processo de busca, permitindo a seleção eficiente dos k menores caminhos.
-  
-*n é o número de vértices do grafo, enquanto m é o número de arestas presentes no grafo.*
-
-**Complexidade:** Totalizando uma complexidade de O(n + k⋅(n + log m)),  k é o número de caminhos a serem encontrados.
-
+![image](https://github.com/KarinyxD/TP_AEDS/assets/121648163/2507e1d5-3331-4481-ba45-0ce8c475172d)
 
 ### 5. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
