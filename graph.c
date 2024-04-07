@@ -29,7 +29,7 @@ void PrintGraph(Graph* graph){
         printf("Vertex %d has the following edges(weight): ", graph->vertexList[i].value);
         Vertex* current = &graph->vertexList[i];
         while(current->next != NULL){
-            printf("%d(%d) ", current->next->value, current->next->weight);
+            printf("%d(%lld) ", current->next->value, current->next->weight);
             current = current->next;
         }
         printf("\n");
@@ -38,7 +38,7 @@ void PrintGraph(Graph* graph){
 
 // void InsertEdge(int v1, int v2, int weight, Graph* graph);
 // function to insert an edge between two vertices
-void InsertEdge(int v1, int v2, int weight, Graph* graph){
+void InsertEdge(int v1, int v2, long long int weight, Graph* graph){
     int v1Exists = 0, v2Exists = 0;
 
     // Check if the vertices v1 and v2 existint weight;
@@ -120,7 +120,7 @@ Edge* GetAdjacentVertices(int v, Graph* graph){
     return adjacentVertices;
 }
 // remove an edge
-void RemoveEdge(int v1, int v2, int weight, Graph* graph){
+void RemoveEdge(int v1, int v2, long long int weight, Graph* graph){
     // find the vertex with value v1
     for (int i = 0; i < graph->numVertices; i++){
         // if the vertex is found, current is the vertex with value v1 and prev is the vertex before current
@@ -137,7 +137,7 @@ void RemoveEdge(int v1, int v2, int weight, Graph* graph){
                 prev = current;
                 current = current->next;
             }
-            printf("Warning: Edge %d(%d) does not exist\n", v2, weight);
+            // printf("Warning: Edge %d(%d) does not exist\n", v2, weight);
             return;
         }
     }
@@ -159,7 +159,7 @@ void FreeGraph(Graph* graph){
 //removes the smallest edge of the graph
 Edge RemoveMinEdge(Graph* graph){
     Edge edge;
-    edge.weight = INT_MAX;
+    edge.weight = LONG_MAX;
     for (int i = 0; i < graph->numVertices; i++){
         Vertex* current = graph->vertexList[i].next;
         while(current != NULL){
@@ -172,7 +172,7 @@ Edge RemoveMinEdge(Graph* graph){
         }
     }
     RemoveEdge(edge.v1, edge.v2, edge.weight,graph);
-    printf("The minimum edge between %d e %d, with weight = %d was delete!\n", edge.v1, edge.v2, edge.weight);
+    // printf("The minimum edge between %d e %d, with weight = %d was delete!\n", edge.v1, edge.v2, edge.weight);
     return edge;
 }
 
@@ -208,88 +208,53 @@ int GetEdgeWeight(int v1, int v2, Graph* graph){
     }
     return -1;
 }
+//Get k shortest paths
+void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, long long int* S){
+    int count[graph->numVertices];
+    binary_heap* list = create_binary_heap(numArestas);
+    for (int i = 0; i < graph->numVertices; i++){
+        count[i] = 0;
+    }
+    
+    list->array[0].v = vi;
+    list->array[0].cost = 0;
+    Priority_list current = list->array[0];
+    int k = 0;
+    //em quanto o contador de caminhos para o ultimo vertice for menor q kCaminhos, faça:
+    while(count[graph->numVertices-1] < kCaminhos && list->size > 0){ 
+        //procurar e remover o menor peso em list e armazenar em current
+        current = extract_min(list);
 
-// void Djikstra(int v1, int v2, Graph* graph){
-//     // create the set Q with all the vertices in the graph
-//     VertexSet* Q = (VertexSet*)malloc(sizeof(VertexSet));
-//     VertexPath* vertexPath = (VertexPath*)malloc(graph->numVertices * sizeof(VertexPath));
-//     Q->numVertices = graph->numVertices;
-//     Q->vertexPathList = vertexPath;
+        if(count[(current.v - 1)] == kCaminhos){ //se ja achou kCaminhos pra o vertice atual
+            continue; //prox interaçao
+        }
 
-//     // create the set S with no vertices
-//     VertexSet* S = (VertexSet*)malloc(sizeof(VertexSet));
-//     VertexPath* vertexPathAux = (VertexPath*)malloc(graph->numVertices * sizeof(VertexPath));
-//     S->numVertices = 0;
-//     S->vertexPathList = vertexPathAux;
+        count[current.v - 1]++;
+        if (current.v == vf){ //se o vertice atual for o final, salva o custo do caminho
+            S[k] = current.cost;
+            k++;
+        }
+        //chamar relaxation pra salvar os custos dos vertices adjacentes ao current na lista 
+        Relaxation(current, list, graph);
+    }
+    S[k] = -1; //sinaliza o final da lista de kCaminhos
+    free(list->array);
+    free(list);
+}
 
-//     // inicialize the array S
-//     // with 0 for vertice 1
-//     // and INT_MAX for the others
-//     for (int i = 0; i < Q->numVertices; i++){
-//         if (graph->vertexList[i].value == 1){
-//             Q->vertexPathList[i].vertex = graph->vertexList[i].value;
-//             Q->vertexPathList[i].shortestPathWeight = 0;
-//         } else {
-//             Q->vertexPathList[i].vertex = graph->vertexList[i].value;
-//             Q->vertexPathList[i].shortestPathWeight = INT_MAX;
-//         }
-//     }
+//Get nearest unvisited vertex
+void Relaxation(Priority_list v_current, binary_heap* list, Graph* graph){
 
-//     // while Q is not empty
-//     while (0 != Q->numVertices){
-//         // get the index of the vertex with the smallest shortest path weight
-//         // in the Q set
-//         int smallest = INT_MAX;
-//         // index of the vertex with the smallest shortest path weight
-//         int index = 0;
+    Edge *AdjVertices = GetAdjacentVertices(v_current.v, graph); // retorna uma lista com os vertices adjacentes a v 
+    int i = 0;
+    Priority_list AddinList;
+    while(AdjVertices[i].v2 != -1){ //em quanto a lista de adj nao chegar ao fim
+        long long int sum = AdjVertices[i].weight + v_current.cost;
+        AddinList.v = AdjVertices[i].v2;
+        AddinList.cost = sum;
+        insert(list, AddinList);
+        i++;
+    }
 
-//         for (int i = 0; i < Q->numVertices; i++){
-//             // need to check if the vertex is not in S
-//             if (Q->vertexPathList[i].shortestPathWeight < smallest && Q->vertexPathList[i].vertex != -1){
-//                 smallest = Q->vertexPathList[i].shortestPathWeight;
-//                 index = i;
-//             }
-//         }
-
-//         // add the vertex with the smallest shortest path weight to S and remove it from Q set turning its value to -1
-//         S->vertexPathList[S->numVertices] = Q->vertexPathList[index];
-//         S->numVertices++;
-//         Q->vertexPathList[index].vertex = -1;
-//         Q->numVertices--;
-
-//         // get the list of adjacent vertices of the vertex with the smallest shortest path weight
-//         Edge* adjacentVertices = GetAdjacentVertices(S->vertexPathList[S->numVertices - 1].vertex, graph);
-//         Edge* adjacentVerticesAux = adjacentVertices;
-
-//         // for each adjacent vertex, update its shortest path weight if it is smaller than the current shortest path weight
-//         while (adjacentVertices->v1 != -1){
-//             // find the vertex in Q set
-//             for (int i = 0; i < Q->numVertices; i++){
-//                 // if the vertex is in the Q set
-//                 // and the vertex is adjacent to the vertex with the smallest shortest path weight
-//                 // change its shortest path weight if it is smaller than the current shortest path weight
-//                 if (Q->vertexPathList[i].vertex == adjacentVertices->v1){
-//                     if (Q->vertexPathList[i].shortestPathWeight > S->vertexPathList[S->numVertices - 1].shortestPathWeight + adjacentVertices->weight){
-//                         Q->vertexPathList[i].shortestPathWeight = S->vertexPathList[S->numVertices - 1].shortestPathWeight + adjacentVertices->weight;
-//                         Q->vertexPathList[i].previousVertex = S->vertexPathList[S->numVertices - 1].vertex;
-//                     }
-//                     break;
-//                 }
-//             }
-//             adjacentVertices++;
-//         }
-//         // create a graph with the shortest path
-//         // create a graph with the shortest path
-//         free(adjacentVerticesAux);
-//     }
-
-//     Graph* shortestPathGraph = CreateEmptyGraph();
-//     for (int i = 0; i < S->numVertices; i++){
-//         // get the weight of the edge from the original graph
-//         int weight = GetEdgeWeight(S->vertexPathList[i].previousVertex, S->vertexPathList[i].vertex, graph);
-//         InsertEdge(S->vertexPathList[i].previousVertex, S->vertexPathList[i].vertex, weight, shortestPathGraph);
-//     }
-//     PrintGraph(shortestPathGraph);
-// }
-
-//Get k shortest pathsi
+    free(AdjVertices);
+}

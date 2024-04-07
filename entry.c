@@ -1,26 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include "entry.h"
 
 Arguments parse_arguments(int argc, char *argv[]){
     Arguments args;
+    int opt;
 
-    if (argc != 3) {
+    while ((opt = getopt(argc, argv, "i:o:")) != -1) {
+        switch (opt) {
+        case 'i':
+            args.inputFile = optarg;
+            break;
+        case 'o':
+            args.outputFile = optarg;
+            break;
+        default:
+            printf("Usage: %s -i inputfile -o outputfile\n", argv[0]);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    if (args.inputFile == NULL || args.outputFile == NULL) {
         printf("Both input and output files must be provided\n");
         exit(EXIT_FAILURE);
     }
 
-    args.inputFile = argv[1];
-    args.outputFile = argv[2];
-
     return args;
 }
 
+
 FILE* open_file(char *filename, char *mode){
-    FILE *file = fopen(filename, mode);
+    char folder[] = "./inputs-and-outputs/";
+    char fullPath[255];
+
+    // Concatenate the folder name and the filename
+    strcpy(fullPath, folder);
+    strcat(fullPath, filename);
+
+    FILE *file = fopen(fullPath, mode);
     if (file == NULL){
-        printf("Error opening file %s\n", filename);
+        printf("Error opening file %s\n", fullPath);
         exit(EXIT_FAILURE);
     }
     return file;
