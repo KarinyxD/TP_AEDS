@@ -95,6 +95,9 @@ Também possui algumas particularidades que, dependendo do contexto, podem invia
 - **Caminhos simples**: Encontra caminhos simples, ou seja, assim como uma ferramenta GPS, mostra caminhos alternativos, e é um bom algoritmo para não só encontrar os custos, mas também os caminhos mais curtos.
 - **Complexidade**: A complexidade é maior do que a do algoritmo de Eppstein devido ao maior número de chamadas ao algoritmo de Dijkstra. A complexidade de tempo de Yen's é O(KN(M + N log N)), onde N é o número de vértices e M é o número de arestas no grafo e K a quantidade de caminhos minimos. Para alcançar essa complexidade de tempo, é necessário utilizar uma Fibonacci heap no algoritmo de Dijkstra para melhorar seu pior caso, que possui complexidade quadrática, O(n^2).
 
+**Referências**: [Algoritmo de Yen](https://en.wikipedia.org//wiki/Yen's_algorithm)
+
+
 ### 2.3 Explicando a solução baseada em Eppstein implementada
 #### 2.3.1 Modifcações em Dijkstra e Pseucodigo
 - O algoritmo de Dijkstra geralmente é implementado com listas de adjacência e uma heap binária em O(m log m). Esta versão modificada visita cada vértice no máximo k vezes, portanto, sua complexidade é O(km log km).
@@ -102,17 +105,25 @@ Também possui algumas particularidades que, dependendo do contexto, podem invia
 ```pseudocodigo
 q = heap mínima vazia
 count = array preenchido com 0
-empilhe (0, s) em q
-enquanto count[t] < k:
-(l, u) = desempilhe q
-se count[u] == k:
-continue
-count[u] += 1
-se u == t:
-encontrou um caminho de comprimento l
-para cada aresta de saída (u, v, w) de u:
-empilhe (l + w, v) em q
+paths = array vazio
+i = 0 //contador para o array paths
+armazene (0, s) em q 
+enquanto (count[t] < k) && (q != 0):
+  (p, u) = desempilhe de q //vertice (u) de menor custo (p) da heap
+  se count[u] == k: //se o contador de caminhos de u for igual k, vai pra próxima iteração
+    continue
+  count[u] += 1 //some +1 para o contador de caminhos de u
+  se u == t: //se u for o vértice final encontrou um caminho de comprimento (p)
+    paths[i] = p
+    i++
+  para cada aresta de saída (u, v, w) de u: //para cada vértice adjacente à u, guarde-o(v) na heap somando o custo de u com o peso da aresta de v (p + w) sendo o novo custo de v
+    empilhe (p + w, v) em q
 ```
+- count -> array que guarda a quantidade de caminhos encontrados para cada vértice, onde o índice corresponde ao numero do vértice.
+- paths -> array que guarda os valores dos primeiros k caminhos encontrados.
+- s -> vértice inicial.
+- t -> vértice final.
+- p -> custo do caminho.
 #### 2.3.2 Complexidade do código
 Essa versão modificada do algoritmo de Djikstra visita cada vertice no máximo k vezes, por isso podemos dizer que possui complexidade O(km log km).
 
@@ -129,9 +140,29 @@ Com essa modificação e mais algumas outras, é possivel manter a complexidade 
 - Chegamos até O(m+nlogn) de complexidade. Que é basicamente a complexidade mencionada na publicação de Eppstein. OBS: A complexidade O(n + m + k) mencionada no tópico 2.2.1 é **excluindo** o primeiro dijkstra.
 - Caso queira uma explicação mais detalhada sobre essas melhorias recomendamos acessar [Implementação Referenciada](https://codeforces.com/blog/entry/102085)
 #### 2.3.3 Sobre a implementação que está atualmente no nosso repositório
-A versão que está implementada no nosso repositório é a primeira, que possui pseudocodigo explicativo. Listamos possiveis melhorias caso seja de interesse do usuário, para nós. Como nosso k, vai variar de 1 até 10, a solução mais simples é suficiente.
+A versão que está implementada no nosso repositório é a primeira, que possui pseudocodigo explicativo. Listamos possiveis melhorias caso seja de interesse do usuário, para nós, como nosso k vai variar de 1 até 10, a solução mais simples é suficiente.
 
 ### 2.4 Explicando a solução baseada no algoritmo de Yen implementada
+A alguns commits atrás estavamos utilizando a solução proposta por Yen. Acontece que por motivos de tempo, e manutenção necessária, optamos por remover essa implementação já que a mesma não nos atendia, pois precisavamos encontrar os k menores caminhos com ciclos. De toda maneira, é uma solução simples e que só demanda conhecimento previo do algoritmo de Djikstra. Recomendamos checar referências citadas no tópico 2.2.2
 
-### 4. Contribuindo
-### 5. Autores
+### 3. Detalhando código-fonte do repositório
+
+### 4. Contribuição
+Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
+
+Pedimos gentilmente que, ao contribuir com código, você mantenha uma prática de comentários em inglês para facilitar a compreensão e a colaboração entre os membros da comunidade internacional.
+
+Embora possamos não ser capazes de aceitar todas as contribuições de imediato, apreciamos muito o esforço e o interesse em ajudar a melhorar nosso projeto. Estaremos atentos a todas as pull requests e issues levantadas e faremos o possível para revisá-las e integrá-las ao projeto. 
+
+### 5. Licensa de Uso
+Licença MIT
+
+Nossa permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia deste software e dos arquivos de documentação associados, para negociar o Software sem restrições, incluindo, sem limitação, os direitos de usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do Software, e permitir que as pessoas a quem o Software é fornecido o façam, sujeitas às seguintes condições:
+
+O aviso de direitos autorais acima e este aviso de permissão devem ser incluídos em todas as cópias ou partes substanciais do Software.
+
+O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM NENHUM TIPO DE GARANTIA, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO ÀS GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM FIM ESPECÍFICO E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DE DIREITOS AUTORAIS SERÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRA RESPONSABILIDADE, SEJA EM AÇÃO DE CONTRATO, TORT OU DE OUTRA FORMA, DECORRENTE, FORA DE OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO PROGRAMAS.
+
+### 6. Autores
+Caio Augusto Reis
+Kariny Abrahão Reis
