@@ -261,8 +261,11 @@ typedef struct {
 ### 4. Análise de Complexidade Assintótica do Algoritmo
 A complexidade desse algoritmo é predominantemente influenciada pela função Shortest_paths(), que é a essência do processo de busca. Por esse motivo, focaremos principalmente nesta função, dado seu papel central e sua maior complexidade.
 - Shortest_paths():
+
 **Descrição:** Esta função é a peça central do algoritmo modificado de Dijkstra, responsável por encontrar os k menores caminhos. Dentro desta função, a Relaxation(), que possui uma complexidade assintótica de O(n + log m), é chamada para atualizar os custos dos vértices. O termo "n" vem da função GetAdjacentVertices, utilizada para obter os vértices adjacentes a um dado vértice. Enquanto isso, o termo "log m" é devido à inserção de um novo elemento na heap. Essa inserção ocorre sempre que um novo caminho à partir de um vértice é descoberto durante o processo de busca, permitindo a seleção eficiente dos k menores caminhos.
+  
 *n é o número de vértices do grafo, enquanto m é o número de arestas presentes no grafo.*
+
 **Complexidade:** Totalizando uma complexidade de O(n + k⋅(n + log m)),  k é o número de caminhos a serem encontrados.
 
 Observações:
@@ -271,9 +274,6 @@ Observações:
     O uso da Relaxation dentro da função Shortest_paths() é essencial para atualizar os custos dos vértices durante a busca, permitindo que o algoritmo selecione eficientemente os k menores caminhos.
 
 Este algoritmo modificado de Dijkstra oferece uma abordagem eficaz para encontrar os k menores caminhos em um grafo, e a compreensão da função Shortest_paths() é fundamental para entender seu funcionamento e desempenho.
-
-
-
 
 
 ### 5. Contribuição
