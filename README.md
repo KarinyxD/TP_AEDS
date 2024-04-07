@@ -102,7 +102,7 @@ Também possui algumas particularidades que, dependendo do contexto, podem invia
 #### 2.3.1 Modifcações em Dijkstra e Pseucodigo
 - O algoritmo de Dijkstra geralmente é implementado com listas de adjacência e uma heap binária em O(m log m). Esta versão modificada visita cada vértice no máximo k vezes, portanto, sua complexidade é O(km log km).
 - Quando o k não apresenta valores muito altos essa abordagem por si só já é suficiente
-- ```pseudocodigo
+```pseudocodigo
 q = heap mínima vazia
 count = array preenchido com 0
 paths = array vazio
