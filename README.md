@@ -133,14 +133,14 @@ Com essa modificação e mais algumas outras, é possivel manter a complexidade 
 - 3. Ao realizar a remoção (pop) do menor custo da nossa heap, podem existir O(m) nós (caminhos), então levamos O(km log km) para remover k valores da nossa heap
 - **Conclusão** A complexidade total é O(km log km). Isso nos permite encontrar todos os menores caminhos com a mesma complexidade de tempo do nosso código atual.
 ##### 2.3.2.2 Com a solução anterior uma nova possibilidade surge
-- 1. O problema com G′ é que ele é ilimitado, podendo haver qualquer número de arestas saindo de um vértice. Se G′ fosse um grafo limitado com no máximo c arestas saindo de um vértice, k-pop levaria tempo O(kc log kc) reduzindo ainda mais a complexidade. Utilizando uma heap de grau maximo fixo reduzimos a complexidade do k-pop (retirada de menores caminhos da heap de menores caminhos).
+- 1. O problema com G′ é que ele é ilimitado, podendo haver qualquer número de arestas saindo de um vértice. Se G′ fosse um grafo limitado com no máximo c arestas saindo de um vértice, k-pop levaria tempo O(kc log kc) reduzindo ainda mais a complexidade. Utilizando uma heap de grau maximo fixo reduzimos a complexidade do k-pop (retirada de menores caminhos da heap).
 ##### 2.3.2.3 Com todas as melhorias mencionadas acima
 - Chegamos até O(m+nlogn) de complexidade. Que é basicamente a complexidade mencionada na publicação de Eppstein. OBS: A complexidade O(n + m + k) mencionada no tópico 2.2.1 é **excluindo** o primeiro dijkstra.
 - Caso queira uma explicação mais detalhada sobre essas melhorias recomendamos acessar [Implementação Referenciada](https://codeforces.com/blog/entry/102085)
-#### 2.3.3 Sobre a implementação que está atualmente no nosso repositório
+#### 2.3.2.4 Sobre a implementação que está atualmente no nosso repositório
 A versão que está implementada no nosso repositório é a primeira, que possui pseudocodigo explicativo. Listamos possiveis melhorias caso seja de interesse do usuário, para nós, como nosso k vai variar de 1 até 10, a solução mais simples é suficiente.
 
-### 2.4 Explicando a solução baseada no algoritmo de Yen implementada
+### 2.3 Explicando a solução baseada no algoritmo de Yen implementada
 A alguns commits atrás estavamos utilizando a solução proposta por Yen. Acontece que por motivos de tempo, e manutenção necessária, optamos por remover essa implementação já que a mesma não nos atendia, pois precisavamos encontrar os k menores caminhos com ciclos. De toda maneira, é uma solução simples e que só demanda conhecimento previo do algoritmo de Djikstra. Recomendamos checar referências citadas no tópico 2.2.2
 
 ### 3. Detalhando código-fonte do repositório
