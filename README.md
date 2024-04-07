@@ -268,13 +268,6 @@ A complexidade desse algoritmo é predominantemente influenciada pela função S
 
 **Complexidade:** Totalizando uma complexidade de O(n + k⋅(n + log m)),  k é o número de caminhos a serem encontrados.
 
-Observações:
-
-    A função Shortest_paths() é a essência do algoritmo modificado de Dijkstra, em torno da qual todo o processo de busca gira. Dada sua complexidade, ela desempenha um papel crucial no desempenho geral do algoritmo.
-    O uso da Relaxation dentro da função Shortest_paths() é essencial para atualizar os custos dos vértices durante a busca, permitindo que o algoritmo selecione eficientemente os k menores caminhos.
-
-Este algoritmo modificado de Dijkstra oferece uma abordagem eficaz para encontrar os k menores caminhos em um grafo, e a compreensão da função Shortest_paths() é fundamental para entender seu funcionamento e desempenho.
-
 
 ### 5. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
