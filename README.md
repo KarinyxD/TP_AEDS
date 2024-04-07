@@ -196,8 +196,65 @@ typedef struct binary_heap {
 5. **Funções de Teste**
    - `print_heap()`: Imprime o conteúdo do heap para fins de depuração.
 
+#### 3.1.2 Detalhamento do Graph
 
+A estrutura de dados do Graph foi projetada para representar e manipular grafos de maneira eficiente. Ela consiste em três principais estruturas: Vertex (vértice), Edge (aresta) e Graph (grafo).
 
+```c
+typedef struct Vertex {
+    int value;
+    long long int weight;
+    struct Vertex *next;
+} Vertex;
+
+typedef struct Edge {
+    int v1;
+    int v2;
+    long long int weight;
+} Edge;
+
+typedef struct {
+    int numVertices;
+    Vertex* vertexList;
+} Graph;
+```
+
+- Abaixo, listamos as funções disponíveis para manipulação da Binary Heap:
+1. **Criação e Inicialização**
+   - `CreateEmptyGraph()`: Cria um novo grafo vazio.
+   - `AddVertex()`: Adiciona um vértice ao grafo. (Utilizada pela função InsertEdge)
+   - `InsertEdge()`: Insere uma aresta entre dois vértices com um peso especificado.
+2. **Verificação e Consulta**
+   - `DoesEdgeExist()`: Verifica se uma aresta entre dois vértices existe no grafo.
+   - `GetAdjacentVertices()`: Obtém os vértices adjacentes a um vértice específico.
+3. **Remoção e Liberação de Memória**
+   - `RemoveEdge()`: Remove uma aresta do grafo.
+   - `FreeGraph()`: Libera a memória alocada para o grafo.
+4. **Operações Especiais**
+   - `TransposeGraph()`: Calcula o grafo transposto, onde todas as direções das arestas são invertidas.
+   - `RemoveMinEdge()`: Remove e retorna a menor aresta do grafo.
+5. **Operações Caminho Minimo**
+   - `Relaxation()`: Realiza a relaxação durante a execução de algoritmos de caminho mais curto.
+   - `Shortest_paths()`: Calcula os caminhos mais curtos entre dois vértices.
+
+#### 3.1.3 Detalhamento da Entry
+
+A estrutura de dados da Entry foi projetada para manipular os argumentos de entrada do programa. Ela contém dois campos: inputFile (arquivo de entrada) e outputFile (arquivo de saída).
+
+```c
+typedef struct {
+    char *inputFile;
+    char *outputFile;
+} Arguments;
+```
+- Abaixo, listamos as funções disponíveis para manipulação da Entry:
+
+1. **Verificação dos Argumentos**
+   - `parse_arguments(int argc, char *argv[])`: Verifica se os argumentos de entrada são corretos e retorna uma estrutura Arguments contendo os nomes dos arquivos de entrada e saída.
+2. **Abertura de Arquivos**
+   - `open_file(char *filename, char *mode)`: Abre um arquivo de acordo com o modo especificado (leitura, escrita, etc.).
+3. **Leitura de Linhas**
+   - `read_line(FILE* file, int *n_vertices, int *n_caminhos, int *k_caminhos)`: Lê uma linha de um arquivo e extrai informações relevantes, como o número de vértices, o número de caminhos e o valor de k.
 
 ### 4. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.

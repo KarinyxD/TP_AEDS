@@ -34,7 +34,6 @@ void FreeGraph(Graph* graph);
 void PrintGraph(Graph* graph);
 Graph* TransposeGraph(Graph* graph);
 Edge RemoveMinEdge(Graph* graph);
-int EqualGraphs(Graph* graph1, Graph* graph2);
 void Relaxation(Priority_list v_current, binary_heap* list, Graph* graph);
 void Shortest_paths(int vi, int vf, int numArestas, int kCaminhos, Graph* graph, long long int* S);
 
