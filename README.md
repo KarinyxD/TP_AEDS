@@ -119,11 +119,11 @@ enquanto (count[t] < k) && (q != 0):
   para cada aresta de saída (u, v, w) de u: //para cada vértice adjacente à u, guarde-o(v) na heap somando o custo de u com o peso da aresta de v (p + w) sendo o novo custo de v
     empilhe (p + w, v) em q
 ```
-1. count -> array que guarda a quantidade de caminhos encontrados para cada vértice, onde o índice corresponde ao numero do vértice.
-2. paths -> array que guarda os valores dos primeiros k caminhos encontrados.
-3. s -> vértice inicial.
-4. t -> vértice final.
-5. p -> custo do caminho.
+- 1. count -> array que guarda a quantidade de caminhos encontrados para cada vértice, onde o índice corresponde ao numero do vértice.
+- 2. paths -> array que guarda os valores dos primeiros k caminhos encontrados.
+- 3. s -> vértice inicial.
+- 4. t -> vértice final.
+- 5. p -> custo do caminho.
 
 #### 2.3.2 Melhorias que podem ser feitas
 ##### 2.3.2.1 Removendo todos os vertices do conjunto G que não alcançam a cidade final: 
