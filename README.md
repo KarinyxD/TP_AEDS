@@ -165,4 +165,5 @@ O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM NENHUM TIPO DE GARAN
 
 ### 6. Autores
 Caio Augusto Reis
+
 Kariny Abrahão Reis
