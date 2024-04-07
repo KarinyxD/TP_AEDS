@@ -143,10 +143,10 @@ A versão que está implementada no nosso repositório é a primeira, que possui
 ### 2.3 Explicando a solução baseada no algoritmo de Yen implementada
 A alguns commits atrás estavamos utilizando a solução proposta por Yen. Acontece que por motivos de tempo, e manutenção necessária, optamos por remover essa implementação já que a mesma não nos atendia, pois precisavamos encontrar os k menores caminhos com ciclos. De toda maneira, é uma solução simples e que só demanda conhecimento previo do algoritmo de Djikstra. Recomendamos checar referências citadas no tópico 2.2.2
 
-### 3. Detalhando código-fonte do repositório
+## 3. Detalhando código-fonte do repositório
 Nesta seção, oferecemos uma visão detalhada do código-fonte presente em nosso repositório. Nosso código é organizado de forma a facilitar a compreensão e manutenção.
 
-#### 3.1 Tipos Abstratos de Dados (TAD)
+### 3.1 Tipos Abstratos de Dados (TAD)
 Utilizamos o conceito de Tipos Abstratos de Dados (TAD) para modularizar nosso código, garantindo uma implementação coesa e independente de detalhes de implementação. Isso significa que encapsulamos a estrutura de dados e as operações relacionadas, permitindo seu uso em diferentes partes do código sem a necessidade de conhecer os detalhes internos de implementação. Essa abordagem promove a reutilização de código, facilita a manutenção e melhora a legibilidade.
 
 A seguir, apresentamos uma visão geral dos 3 tipos abstratos de dados presentes em nosso código, seguida por uma explanação detalhada de cada um.
