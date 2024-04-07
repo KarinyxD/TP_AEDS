@@ -144,6 +144,60 @@ A versão que está implementada no nosso repositório é a primeira, que possui
 A alguns commits atrás estavamos utilizando a solução proposta por Yen. Acontece que por motivos de tempo, e manutenção necessária, optamos por remover essa implementação já que a mesma não nos atendia, pois precisavamos encontrar os k menores caminhos com ciclos. De toda maneira, é uma solução simples e que só demanda conhecimento previo do algoritmo de Djikstra. Recomendamos checar referências citadas no tópico 2.2.2
 
 ### 3. Detalhando código-fonte do repositório
+Nesta seção, oferecemos uma visão detalhada do código-fonte presente em nosso repositório. Nosso código é organizado de forma a facilitar a compreensão e manutenção.
+
+#### 3.1 Tipos Abstratos de Dados (TAD)
+Utilizamos o conceito de Tipos Abstratos de Dados (TAD) para modularizar nosso código, garantindo uma implementação coesa e independente de detalhes de implementação. Isso significa que encapsulamos a estrutura de dados e as operações relacionadas, permitindo seu uso em diferentes partes do código sem a necessidade de conhecer os detalhes internos de implementação. Essa abordagem promove a reutilização de código, facilita a manutenção e melhora a legibilidade.
+
+A seguir, apresentamos uma visão geral dos 3 tipos abstratos de dados presentes em nosso código, seguida por uma explanação detalhada de cada um.
+
+1. Binary Heap (heap binário): Implementa a estrutura de dados do heap binário modificado, que é essencial para manter uma lista de prioridades durante a execução de certos algoritmos, como o algoritmo de Dijkstra. Ele oferece operações básicas, como inserção, remoção e recuperação do menor elemento do heap, bem como funções auxiliares para manter a propriedade do heap.
+2. Graph (grafo): Define as estruturas de dados necessárias para representar e manipular grafos. Ele inclui definições para vértices (Vertex) e arestas (Edge), bem como a estrutura principal Graph que mantém informações sobre o número de vértices e uma lista de adjacência. Este TAD oferece funções para adicionar e remover vértices e arestas, verificar a existência de uma aresta, obter vértices adjacentes e outras operações comuns em grafos.
+3. Arguments (argumentos): Responsável por armazenar e manipular os argumentos de entrada do programa. Ele define a estrutura Arguments, que contém informações como o nome do arquivo de entrada e o nome do arquivo de saída. Além disso, fornece funções para analisar os argumentos passados pela linha de comando, abrir arquivos e ler linhas de arquivos. Isso ajuda a garantir uma interação suave com o usuário e uma configuração correta do programa.
+
+#### 3.1.1 Detalhamento da Binary Heap
+A estrutura de dados da Binary Heap foi modificada para atender às necessidades específicas do nosso projeto. Em vez de ter um array de inteiros como é comum em implementações tradicionais, optamos por utilizar um array de structs Priority_list, que armazena o valor do vértice (v) e o custo associado a ele (cost).
+
+```c
+// Struct para armazenar a lista de prioridade
+typedef struct{
+    int v;
+    long long int cost;
+} Priority_list;
+
+// Estrutura de dados do heap binário
+typedef struct binary_heap {
+    Priority_list *array;
+    int capacity;
+    int size;
+} binary_heap;
+```
+
+- Abaixo, listamos as funções disponíveis para manipulação da Binary Heap:
+1. **Funções de Criação**
+   - `create_binary_heap()`: Cria um novo heap binário com a capacidade especificada.
+   - `heapify()`: Transforma um array em uma binary heap.
+
+2. **Funções Básicas**
+   - `find_min()`: Retorna o menor elemento do heap.
+   - `extract_min()`: Remove e retorna o menor elemento do heap.
+   - `delete_min()`: Remove o menor elemento do heap.
+   - `replace_node()`: Substitui um elemento no heap.
+   - `insert()`: Insere um novo elemento no heap.
+
+3. **Funções de Inspeção**
+   - `size()`: Retorna o tamanho do heap.
+   - `is_empty()`: Verifica se o heap está vazio.
+
+4. **Funções Internas**
+   - `sift_up()`: Realiza o ajuste para cima após uma inserção.
+   - `sift_down()`: Realiza o ajuste para baixo após uma remoção.
+
+5. **Funções de Teste**
+   - `print_heap()`: Imprime o conteúdo do heap para fins de depuração.
+
+
+
 
 ### 4. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
