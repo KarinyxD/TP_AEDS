@@ -256,16 +256,34 @@ typedef struct {
 2. **Abertura de Arquivos**
    - `open_file()`: Abre um arquivo de acordo com o modo especificado (leitura, escrita, etc.).
 3. **Leitura de Linhas**
-   - `read_line()`: Lê uma linha de um arquivo e extrai informações relevantes, como o número de vértices, o número de caminhos e o valor de k.
+   - `read_line()`
 
-### 4. Contribuição
+### 4. Análise de Complexidade Assintótica do Algoritmo
+A complexidade desse algoritmo é predominantemente influenciada pela função Shortest_paths(), que é a essência do processo de busca. Por esse motivo, focaremos principalmente nesta função, dado seu papel central e sua maior complexidade.
+- Shortest_paths():
+**Descrição:** Esta função é a peça central do algoritmo modificado de Dijkstra, responsável por encontrar os k menores caminhos. Dentro desta função, a Relaxation(), que possui uma complexidade assintótica de O(n + log m), é chamada para atualizar os custos dos vértices. O termo "n" vem da função GetAdjacentVertices, utilizada para obter os vértices adjacentes a um dado vértice. Enquanto isso, o termo "log m" é devido à inserção de um novo elemento na heap. Essa inserção ocorre sempre que um novo caminho à partir de um vértice é descoberto durante o processo de busca, permitindo a seleção eficiente dos k menores caminhos.
+*n é o número de vértices do grafo, enquanto m é o número de arestas presentes no grafo.*
+**Complexidade:** Totalizando uma complexidade de O(n + k⋅(n + log m)),  k é o número de caminhos a serem encontrados.
+
+Observações:
+
+    A função Shortest_paths() é a essência do algoritmo modificado de Dijkstra, em torno da qual todo o processo de busca gira. Dada sua complexidade, ela desempenha um papel crucial no desempenho geral do algoritmo.
+    O uso da Relaxation dentro da função Shortest_paths() é essencial para atualizar os custos dos vértices durante a busca, permitindo que o algoritmo selecione eficientemente os k menores caminhos.
+
+Este algoritmo modificado de Dijkstra oferece uma abordagem eficaz para encontrar os k menores caminhos em um grafo, e a compreensão da função Shortest_paths() é fundamental para entender seu funcionamento e desempenho.
+
+
+
+
+
+### 5. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
 
 Pedimos gentilmente que, ao contribuir com código, você mantenha uma prática de comentários em inglês para facilitar a compreensão e a colaboração entre os membros da comunidade internacional.
 
 Embora possamos não ser capazes de aceitar todas as contribuições de imediato, apreciamos muito o esforço e o interesse em ajudar a melhorar nosso projeto. Estaremos atentos a todas as pull requests e issues levantadas e faremos o possível para revisá-las e integrá-las ao projeto. 
 
-### 5. Licensa de Uso
+### 6. Licensa de Uso
 Licença MIT
 
 Nossa permissão é concedida, gratuitamente, a qualquer pessoa que obtenha uma cópia deste software e dos arquivos de documentação associados, para negociar o Software sem restrições, incluindo, sem limitação, os direitos de usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias do Software, e permitir que as pessoas a quem o Software é fornecido o façam, sujeitas às seguintes condições:
@@ -274,7 +292,7 @@ O aviso de direitos autorais acima e este aviso de permissão devem ser incluíd
 
 O SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA", SEM NENHUM TIPO DE GARANTIA, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO ÀS GARANTIAS DE COMERCIALIZAÇÃO, ADEQUAÇÃO A UM FIM ESPECÍFICO E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DE DIREITOS AUTORAIS SERÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANOS OU OUTRA RESPONSABILIDADE, SEJA EM AÇÃO DE CONTRATO, TORT OU DE OUTRA FORMA, DECORRENTE, FORA DE OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO PROGRAMAS.
 
-### 6. Autores
+### 7. Autores
 Caio Augusto Reis
 
-Kariny Abrahão Reis
+Kariny Abrahão
