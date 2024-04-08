@@ -263,7 +263,7 @@ typedef struct {
 
 ![Screenshot from 2024-04-07 22-41-04](https://github.com/KarinyxD/TP_AEDS/assets/105565634/1de50253-4800-461f-9116-270ba3959308)
 
-- Agora, faremos uma comparação entre a média de tempo dos testes realizados e os valores reais da função. Em seguida, será apresentado um gráfico ilustrando os comportamentos dos resultados.
+- Agora, faremos uma comparação entre a média de tempo dos testes realizados e os valores reais da função. Em seguida, será apresentado um gráfico ilustrando os comportamentos dos resultados. Podemos observar através da tabela e do gráfico que ambas exibem um comportamento semelhante.
 
 ![Screenshot from 2024-04-07 22-52-58](https://github.com/KarinyxD/TP_AEDS/assets/105565634/e76d159b-02ea-4868-8309-0e17b435e34d)
 
