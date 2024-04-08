@@ -259,12 +259,14 @@ typedef struct {
    - `read_line()`
 
 ### 4. Análise de Complexidade Assintótica do Algoritmo
-- Este repositório está em constante evolução, estamos trabalhando para realizar a analise de complexidade, de não só uma, mas todas as funções implementadas.
+- A seguir, apresentamos a análise de complexidade assintótica das funções chamadas no programa.
 
 ![Screenshot from 2024-04-07 22-41-04](https://github.com/KarinyxD/TP_AEDS/assets/105565634/1de50253-4800-461f-9116-270ba3959308)
 
+Agora, faremos uma comparação entre a média de tempo dos testes realizados e os valores reais da função. Em seguida, será apresentado um gráfico ilustrando os comportamentos dos resultados.
+![Screenshot from 2024-04-07 22-52-58](https://github.com/KarinyxD/TP_AEDS/assets/105565634/e76d159b-02ea-4868-8309-0e17b435e34d)
+
 ![WhatsApp Image 2024-04-07 at 22 07 33](https://github.com/KarinyxD/TP_AEDS/assets/105565634/caeec64c-4c4b-4edf-ae22-bf97bd4da345)
-![Screenshot from 2024-04-07 22-40-00](https://github.com/KarinyxD/TP_AEDS/assets/105565634/4b285232-d11f-400c-ac30-f98aeb89edb4)
 
 ### 5. Contribuição
 Atualmente, não temos uma política rígida de contribuição, mas estamos sempre abertos e receptivos a colaborações da comunidade. Se você tiver sugestões de melhorias, correções de bugs ou novos recursos que gostaria de ver implementados, sinta-se à vontade para enviar uma pull request ou abrir uma issue no GitHub.
